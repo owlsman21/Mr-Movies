@@ -28,7 +28,7 @@
         h1, h2 {
             font-family: 'Playfair Display', serif; /* Elegant heading font */
             color: #e50914; /* Netflix red, bold for impact */
-            text-align: center;
+            text-align: center; /* Ensures h1 and h2 are centered */
             margin-bottom: 25px;
             letter-spacing: 1.5px; /* Add some spacing to headings */
         }
@@ -38,12 +38,11 @@
         }
         h2 {
             margin-top: 40px;
-            font-size: 2.2em;
-            border-bottom: 2px solid #e50914; /* Red underline for headings */
+            font-size: 5.5em; /* Significantly increased font size for h2 */
+            /* Removed border-bottom for h2 */
             padding-bottom: 10px;
             display: inline-block; /* To make border-bottom only as wide as text */
-            margin-left: auto; /* Center inline-block */
-            margin-right: auto; /* Center inline-block */
+            /* text-align: center; // This centers the text within the h2, but the h2 itself is centered by its parent */
         }
         p {
             margin-bottom: 18px;
@@ -152,15 +151,16 @@
             flex-direction: column;
         }
         .movie-title {
-            font-size: 1.5rem;
+            font-size: 2.2rem; /* Increased font size for prominence */
             font-weight: bold;
-            color: #63b3ed; /* Indigo-like color */
+            color: #e50914; /* Changed to Netflix red for more pop */
             margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7); /* Enhanced text shadow for depth */
         }
         .movie-description {
-            font-size: 0.9rem;
-            color: #a0aec0; /* Lighter gray for description */
-            line-height: 1.5;
+            font-size: 1.1em; /* Increased font size for better readability */
+            color: #f0f0f0; /* Brighter text for better contrast */
+            line-height: 1.6; /* Adjusted line height for readability */
             flex-grow: 1; /* Allows description to take available space */
         }
         .movie-card-link { /* New style for button within movie card */
@@ -173,7 +173,7 @@
             text-decoration: none;
             font-weight: bold;
             margin-top: 1rem;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .movie-card-link:hover {
             background-color: #f40a15; /* Brighter red on hover */
@@ -181,6 +181,11 @@
             box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); /* Shadow on hover */
         }
 
+        /* General content block styling to ensure centering of its children */
+        .content {
+            text-align: center; /* This will center inline-block elements like h2 */
+            margin-top: 40px; /* Consistent spacing between content blocks */
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -192,7 +197,7 @@
                 font-size: 2.2em;
             }
             h2 {
-                font-size: 1.6em;
+                font-size: 3.5em; /* Adjusted for smaller screens, still significantly larger */
             }
             .logo {
                 max-width: 200px;
