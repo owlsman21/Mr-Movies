@@ -39,10 +39,8 @@
         h2 {
             margin-top: 40px;
             font-size: 5.5em; /* Significantly increased font size for h2 */
-            /* Removed border-bottom for h2 */
             padding-bottom: 10px;
             display: inline-block; /* To make border-bottom only as wide as text */
-            /* text-align: center; // This centers the text within the h2, but the h2 itself is centered by its parent */
         }
         p {
             margin-bottom: 18px;
@@ -54,14 +52,14 @@
             display: block;
             margin: 0 auto 40px auto; /* Center the logo with more space */
         }
+        /* General trailer-embed styles (for main featured trailers) */
+        /* These styles will now only apply if you add a standalone .trailer-embed elsewhere */
         .trailer-embed {
             background-color: #000; /* Black background for video embeds */
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #444; /* Subtle border */
+            padding: 0; /* No padding around the video itself */
+            border: none; /* No border for the main video container */
             margin-bottom: 30px;
             border-radius: 8px; /* Rounded corners for embed box */
-            /* Add responsive aspect ratio for embeds */
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width) */
             height: 0;
@@ -74,6 +72,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            border: none;
         }
         .movie-link {
             display: inline-block;
@@ -122,7 +121,7 @@
             text-decoration: underline;
         }
 
-        /* Styles for Movie Cards (from previous immersive, adapted to your style) */
+        /* Styles for Movie Cards in the grid */
         .movie-card {
             background-color: #2d3748; /* Darker card background */
             border-radius: 8px;
@@ -131,24 +130,51 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
-            height: 100%; /* Ensure cards are same height in a grid */
+            /* width: 250px; /* Optional: Set a fixed width if desired, but grid handles this */
         }
         .movie-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
-        .movie-poster {
+
+        /* Specific styles for .trailer-embed within a .movie-card (for fixed height media) */
+        .movie-card .trailer-embed {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Fixed height for consistency with movie posters */
+            padding-bottom: 0; /* Override responsive padding for fixed height */
+            overflow: hidden;
+            background-color: #000;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex; /* For centering the iframe */
+            align-items: center;
+            justify-content: center;
+            padding: 0; /* Ensure no extra padding around thumbnail/video */
+            border: none; /* No border for the media area itself */
+        }
+        .movie-card .trailer-embed iframe {
+            position: static; /* Let flexbox handle positioning */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Will letterbox 16:9 video in 2:3 space */
+            border: none;
+        }
+
+        .movie-poster { /* Keep this for image-based cards */
             width: 100%;
             height: 300px; /* Fixed height for consistency */
             object-fit: cover; /* Cover the area, cropping if necessary */
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
         }
+
         .movie-info {
             padding: 1rem;
-            flex-grow: 1; /* Allows info section to expand */
+            flex-grow: 1; /* Allow info section to grow if needed */
             display: flex;
             flex-direction: column;
+            justify-content: flex-start; /* Aligns content to the start */
         }
         .movie-title {
             font-size: 2.2rem; /* Increased font size for prominence */
@@ -161,7 +187,8 @@
             font-size: 1.1em; /* Increased font size for better readability */
             color: #f0f0f0; /* Brighter text for better contrast */
             line-height: 1.6; /* Adjusted line height for readability */
-            flex-grow: 1; /* Allows description to take available space */
+            flex-grow: 0; /* Prevent description from growing unnecessarily */
+            margin-bottom: 0.5rem; /* Small margin to separate from button */
         }
         .movie-card-link { /* New style for button within movie card */
             display: inline-block;
@@ -172,7 +199,7 @@
             text-align: center;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 1rem;
+            margin-top: auto; /* Pushes the button to the bottom of the flex container */
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .movie-card-link:hover {
@@ -186,6 +213,56 @@
             text-align: center; /* This will center inline-block elements like h2 */
             margin-top: 40px; /* Consistent spacing between content blocks */
         }
+
+        /* Styles for the video thumbnail and play button overlay */
+        .trailer-embed-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: #000; /* Ensures black background if image delays */
+            display: flex; /* For centering content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+
+        .trailer-embed-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .trailer-embed-placeholder:hover img {
+            opacity: 0.8; /* Dim the image slightly on hover */
+        }
+
+        .trailer-embed-play-button {
+            position: absolute;
+            width: 60px; /* Size of the play button */
+            height: 42px; /* Aspect ratio for YouTube-like button */
+            background-color: rgba(255, 0, 0, 0.8); /* Red, slightly transparent */
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Allows clicks to pass through to the parent placeholder */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .trailer-embed-placeholder:hover .trailer-embed-play-button {
+            transform: scale(1.1); /* Slightly enlarge button on hover */
+        }
+
+        .trailer-embed-play-button::before {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 18px; /* Creates a play triangle */
+            border-color: transparent transparent transparent #fff; /* White triangle */
+        }
+
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -206,6 +283,19 @@
                 padding: 12px 25px;
                 font-size: 1em;
             }
+            /* Adjust grid for smaller screens */
+            .grid-cols-1 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .sm\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .lg\:grid-cols-4 { /* This will be the default for larger screens */
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -222,16 +312,17 @@
 <body>
     <div class="container">
         <!-- Logo path updated to go up one level to the images folder -->
-             
- 
-       <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
-    <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
-    <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
-    <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
-   
-    <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
-    <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
-</nav>
+        <!-- <img src="../images/mr_movies_logo.png" alt="Mr. Movies Logo" class="logo"> -->
+
+        <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
+            <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
+            <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
+            <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
+            <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
+            <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
+            <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
+            <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
+        </nav>
 
         <h1 style="color: #e50914; font-size: 3.5em; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">
             Mr. Movies: Comedy Trailers & Film Insights
@@ -243,123 +334,208 @@
             Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site:MovieHub!</a>
         </p>
 
-        <!-- TRAILERS SECTION for Comedy Movies -->
-        <div class="content">
-            <h2>Featured Comedy Trailer: Superbad </h2>
-            <p>Two co-dependent high school seniors are forced to deal with separation anxiety after their plan to buy alcohol for a party goes awry.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="4oB0fS6n40Y">
-            </div>
-            <p>Intrigued? Watch the full movie now on our main site:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Superbad" class="movie-link">Watch Superbad on MovieHub</a>
-        </div>
-
-        <div class="content">
-            <h2>Featured Comedy Trailer: The Hangover</h2>
-            <p>Three buddies wake up from a bachelor party in Las Vegas with no memory of the previous night and the bachelor missing. They must retrace their steps to find him.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="tlx3bDmcWpM">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Hangover" class="movie-link">Watch The Hangover on MovieHub</a>
-        </div>
-        <div class="content">
-            <h2>Featured Comedy Trailer: Bridesmaids</h2>
-            <p>Competitive maid of honor Lillian and her bridesmaids go head-to-head over wedding planning before the big day.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="nr_t_fXq4pM">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Bridesmaids" class="movie-link">Watch Bridesmaids on MovieHub</a>
-        </div>
-        <!-- Add more Comedy Trailers here -->
-        <!-- END TRAILERS SECTION -->
-
         <!-- MOVIE POSTERS GRID for Comedy Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Comedy Movies</h2>
-        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            <!-- Comedy Movie Card 1: Superbad -->
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Comedy Movies</h2>
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Movie Card 1: Superbad -->
             <div class="movie-card">
-
-
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Superbad">
-                    <img src="../images/The%20Squatchers.jpg" alt="The Squatchers Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="4oB0fS6n40Y"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">The Squatchers 2025</h3>
-                    <p class="movie-description">
-                         A group of friends, known as The Squatchers set out to fulfill their dream of finding Bigfoot, only to wind up on a heart-pounding quest for survival against the unknown. This is one adventure you have to see to believe.
-                    </p>
-
-
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Squatchers" class="movie-card-link">
-                        View Trailer & More
-                    </a>
-                </div>
-            </div>                                       
-
-            <!-- Comedy Movie Card 2: The Hangover -->
-            <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners2-Movie">
-                    <img src="../images/The.Inbetweeners.2.jpg" alt="The.Inbetweeners.2 Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
-                <div class="movie-info">
-                    <h3 class="movie-title">The.Inbetweeners.2</h3>
-                    <p class="movie-description">
-                        Jay, Neil, Simon and Will reunite in Australia after the gang finds out that Jay is indulging in a life of hedonism and promiscuity as a star DJ in Sydney. However, when they get there, they discover that Jay has vastly overstated his success.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners2-Movie" class="movie-card-link">
-                        View Trailer & More
-                    </a>
-                </div>
-            </div>
-            
-
-            <!-- Comedy Movie Card 3: Bridesmaids -->
-            <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners-Movie">
-                    <img src="../images/The-Inbetweeners-Movie.jpg" alt="The-Inbetweeners-Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
-                <div class="movie-info">
-                    <h3 class="movie-title">The-Inbetweeners-Movie</h3>
-                    <p class="movie-description">
-                       Now that their final year of school is over, friends Will, Simon, Neil and Jay are off to Crete for a holiday. Hoping to get as much sun, sea and sex as possible, the boys quickly find more trouble than they had bargained for.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners-Movie" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Superbad (2007)</h3>
+                    <p class="movie-description">Two co-dependent high school seniors are forced to deal with separation anxiety after their plan to buy alcohol for a party goes awry.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Superbad" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Comedy Movie Card 4: Anchorman: The Legend of Ron Burgundy -->
+            <!-- Movie Card 2: The Hangover -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Anchorman">
-                    <img src="../images/anchorman_poster.jpg" alt="Anchorman Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="tlx3bDmcWpM"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Anchorman: The Legend of Ron Burgundy</h3>
-                    <p class="movie-description">
-                        Ron Burgundy, a top-rated anchorman in San Diego in the 1970s, is challenged by a new female co-anchor who shakes up his male-dominated world.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Anchorman" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">The Hangover (2009)</h3>
+                    <p class="movie-description">Three buddies wake up from a bachelor party in Las Vegas with no memory of the previous night and the bachelor missing. They must retrace their steps to find him.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Hangover" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- NEW COMEDY MOVIE CARD: Oxy Morons -->
+            <!-- Movie Card 3: Bridesmaids -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Oxy-Morons">
-                    <img src="https://owlsman21.github.io/MovieHub/images/Oxy%20Morons.jpg" alt="Oxy Morons Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="nr_t_fXq4pM"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Oxy Morons</h3>
-                    <p class="movie-description">
-                        A group of friends navigates the absurdities of life and unexpected challenges with a unique brand of humor and a series of comical mishaps.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Oxy-Morons" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Bridesmaids (2011)</h3>
+                    <p class="movie-description">Competitive maid of honor Lillian and her bridesmaids go head-to-head over wedding planning before the big day.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Bridesmaids" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
-            <!-- END NEW COMEDY MOVIE CARD -->
+
+            <!-- Movie Card 4: The Squatchers 2025 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="k_c5d9e8f7g"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Squatchers (2025)</h3>
+                    <p class="movie-description">A group of friends, known as The Squatchers set out to fulfill their dream of finding Bigfoot, only to wind up on a heart-pounding quest for survival against the unknown. This is one adventure you have to see to believe.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Squatchers" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 5: The Inbetweeners 2 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="H1y3kL4j5mN"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Inbetweeners 2 (2014)</h3>
+                    <p class="movie-description">Jay, Neil, Simon and Will reunite in Australia after the gang finds out that Jay is indulging in a life of hedonism and promiscuity as a star DJ in Sydney. However, when they get there, they discover that Jay has vastly overstated his success.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners2-Movie" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 6: The Inbetweeners Movie -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="X2y7z8a9b0c"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Inbetweeners Movie (2011)</h3>
+                    <p class="movie-description">Now that their final year of school is over, friends Will, Simon, Neil and Jay are off to Crete for a holiday. Hoping to get as much sun, sea and sex as possible, the boys quickly find more trouble than they had bargained for.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Inbetweeners-Movie" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 7: Anchorman: The Legend of Ron Burgundy -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="p_yK2y_0d6k"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Anchorman: The Legend of Ron Burgundy (2004)</h3>
+                    <p class="movie-description">Ron Burgundy, a top-rated anchorman in San Diego in the 1970s, is challenged by a new female co-anchor who shakes up his male-dominated world.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Anchorman" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 8: Oxy Morons -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="q_w8e7d6c5b"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Oxy Morons (2010)</h3>
+                    <p class="movie-description">A group of friends navigates the absurdities of life and unexpected challenges with a unique brand of humor and a series of comical mishaps.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Oxy-Morons" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 9: Step Brothers -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="C1g5p-j7r0o"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Step Brothers (2008)</h3>
+                    <p class="movie-description">Two aimless and unemployed adults are forced to live together when their single parents marry. Their rivalry soon turns into an unexpected bond.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Step-Brothers" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 10: Dumb and Dumber -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="l1V3h-d4r5e"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Dumb and Dumber (1994)</h3>
+                    <p class="movie-description">After a woman leaves a briefcase at the airport terminal, a dumb limo driver and his dumber friend embark on a cross-country road trip to return it to her.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Dumb-and-Dumber" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 11: The Grand Budapest Hotel -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="zL5y_j9Dq00"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Grand Budapest Hotel (2014)</h3>
+                    <p class="movie-description">The adventures of Gustave H, a legendary concierge at a famous hotel from the interwar period, and Zero Moustafa, the lobby boy who becomes his most trusted friend.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Grand-Budapest-Hotel" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 12: Ferris Bueller's Day Off -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="R-P6p86nvvY"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Ferris Bueller's Day Off (1986)</h3>
+                    <p class="movie-description">A high school slacker borrows a Ferrari and embarks on a day of adventure in Chicago with his girlfriend and best friend, all while trying to avoid his dean of students.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Ferris-Buellers-Day-Off" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 13: Groundhog Day -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="tSVEq-z2L0U"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Groundhog Day (1993)</h3>
+                    <p class="movie-description">A weatherman finds himself reliving the same day over and over again.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Groundhog-Day" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 14: The Princess Bride -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="WfQv5e7D8gM"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Princess Bride (1987)</h3>
+                    <p class="movie-description">A classic fairy tale, with a twist. The film follows a farm boy-turned-pirate who must rescue his true love from the evil Prince Humperdinck.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Princess-Bride" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 15: When Harry Met Sally... -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="vmvsN_k_t54"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">When Harry Met Sally... (1989)</h3>
+                    <p class="movie-description">Harry and Sally have known each other for years, and they are very good friends. But can they ever truly be just friends, or will sex get in the way?</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=When-Harry-Met-Sally" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 16: Booksmart -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="KUx2HhUoV6g"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Booksmart (2019)</h3>
+                    <p class="movie-description">On the eve of graduation, two academic superstars and best friends realize they should have worked less and played more. Determined not to fall short of their peers, the girls try to cram four years of fun into one night.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Booksmart" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 17: School of Rock -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="3Psf-dcx_e4"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">School of Rock (2003)</h3>
+                    <p class="movie-description">After being kicked out of his rock band, Dewey Finn becomes a substitute teacher of a fourth-grade class at a prestigious elementary school, where he tries to turn them into a rock band.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=School-of-Rock" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 18: Elf -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="gW9w_d0j_a4"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Elf (2003)</h3>
+                    <p class="movie-description">Raised as an oversized elf, Buddy travels from the North Pole to New York City to find his true identity as a human.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Elf" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 19: The Big Lebowski -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="ngjD_yUfN0M"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Big Lebowski (1998)</h3>
+                    <p class="movie-description">Jeff "The Dude" Lebowski, a Los Angeles slacker who just wants to bowl and drink White Russians, is mistaken for a millionaire with the same name.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Big-Lebowski" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 20: Office Space -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="d_f2a3g4h5i"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Office Space (1999)</h3>
+                    <p class="movie-description">Three disgruntled IT workers rebel against their soul-crushing big tech corporation.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Office-Space" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
@@ -371,42 +547,96 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Video Lazy Loading Script ---
             const videoEmbeds = document.querySelectorAll('.trailer-embed[data-platform][data-videoid]');
 
             videoEmbeds.forEach(embedDiv => {
                 const platform = embedDiv.getAttribute('data-platform');
-                const videoId = embedDiv.getAttribute('data-videoid');
-                let iframeSrc = '';
-                
-                if (platform === 'youtube') {
-                    // Standard YouTube embed URL format
-                    iframeSrc = `https://www.youtube.com/embed/${videoId}?rel=0`; // rel=0 prevents related videos
-                } else if (platform === 'okru') {
-                    // OK.ru embed URL format (this is a common one, but may vary)
-                    // You might need to adjust the width/height or embed code if your OK.ru videos have a different format
-                    iframeSrc = `https://ok.ru/videoembed/${videoId}`; 
-                } else if (platform === 'mega') {
-                    // IMPORTANT: Mega.nz embeds are complex and often require specific embed codes
-                    // or direct file links that may not be publicly embeddable.
-                    // You might need to manually get the embed code from Mega for each video.
-                    // This is a placeholder and might not work directly with just the video ID.
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
-                    // For now, if Mega, it will show an error message.
-                }
+                const rawVideoId = embedDiv.getAttribute('data-videoid');
+                // Clean up the ID: remove leading '/', and any '?si=' parameters
+                const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
 
-                if (iframeSrc) {
+                if (platform === 'youtube' && videoId) {
+                    console.log('Found YouTube embed div. Video ID:', videoId);
+
+                    // Create the placeholder elements (thumbnail + play button)
+                    const placeholder = document.createElement('div');
+                    placeholder.classList.add('trailer-embed-placeholder');
+                    // Use hqdefault.jpg for reliability
+                    placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+                    placeholder.style.backgroundSize = 'cover';
+                    placeholder.style.backgroundPosition = 'center';
+
+                    const playButton = document.createElement('div');
+                    playButton.classList.add('trailer-embed-play-button');
+
+                    placeholder.appendChild(playButton);
+                    embedDiv.appendChild(placeholder);
+                    console.log('Placeholder created and appended for video ID:', videoId);
+
+                    // Add click listener to load the actual iframe
+                    placeholder.addEventListener('click', function() {
+                        console.log('Placeholder clicked for video ID:', videoId);
+                        const iframe = document.createElement('iframe');
+                        // Autoplay is set to 1 as it works on sci-fi.html
+                        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.setAttribute('allowfullscreen', '');
+                        iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
+
+                        console.log('Attempting to load YouTube video with ID:', videoId); // Log for debugging
+
+                        // Replace the placeholder with the iframe
+                        try {
+                            embedDiv.replaceChild(iframe, placeholder);
+                            console.log('Successfully replaced placeholder with iframe for video ID:', videoId);
+                        } catch (e) {
+                            console.error('Error replacing placeholder with iframe for video ID', videoId, ':', e);
+                            embedDiv.innerHTML = `
+                                <p style="color:red; text-align:center; padding:20px;">
+                                    This video cannot be embedded here, likely due to YouTube's restrictions.
+                                    <br>
+                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
+                                </p>
+                            `;
+                        }
+                    });
+
+                } else if (platform === 'okru' && videoId) {
+                    // For OK.ru, directly embed a smaller placeholder or keep current method
                     const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', iframeSrc);
+                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
                     iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'); // Added web-share for modern embeds
+                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
                     iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('title', `Video player for ${platform} ID: ${videoId}`); // Add a title for accessibility
-
-                    // Clear existing content and append iframe
+                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
                     embedDiv.innerHTML = '';
                     embedDiv.appendChild(iframe);
+                } else if (platform === 'mega') {
+                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
-                    embedDiv.innerHTML = '<p style="color:red;">Error: Unsupported video platform or missing ID.</p>';
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
+                }
+            });
+
+            // --- Current page genre button removal logic ---
+            const pathSegments = window.location.pathname.split('/');
+            const currentPageFileName = pathSegments[pathSegments.length - 1].split('.')[0]; 
+            
+            const navLinks = document.querySelectorAll('nav .movie-link');
+
+            navLinks.forEach(link => {
+                const linkFileName = link.getAttribute('href').split('/').pop().split('.')[0];
+                
+                const isHomePath = (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html'));
+                const isHomeLink = link.getAttribute('href').endsWith('index.html') || link.getAttribute('href') === '../index.html';
+
+                if (isHomePath && isHomeLink) {
+                    link.style.display = 'none'; // Hide Home button on Home page
+                } else if (linkFileName === currentPageFileName) {
+                    link.style.display = 'none'; // Hide the button for the current genre page
                 }
             });
         });

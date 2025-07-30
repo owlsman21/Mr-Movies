@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Movies - Sci-Fi Trailers & Stories</title>
+    <title>Mr. Movies - Western Trailers & Stories</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-     <style>
+    <style>
         body {
             font-family: 'Montserrat', sans-serif; /* Modern body font */
             margin: 0; /* Remove default body margin */
@@ -39,10 +39,8 @@
         h2 {
             margin-top: 40px;
             font-size: 5.5em; /* Significantly increased font size for h2 */
-            /* Removed border-bottom for h2 */
             padding-bottom: 10px;
             display: inline-block; /* To make border-bottom only as wide as text */
-            /* text-align: center; // This centers the text within the h2, but the h2 itself is centered by its parent */
         }
         p {
             margin-bottom: 18px;
@@ -54,14 +52,14 @@
             display: block;
             margin: 0 auto 40px auto; /* Center the logo with more space */
         }
+        /* General trailer-embed styles (for main featured trailers) */
+        /* These styles will now only apply if you add a standalone .trailer-embed elsewhere */
         .trailer-embed {
             background-color: #000; /* Black background for video embeds */
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #444; /* Subtle border */
+            padding: 0; /* No padding around the video itself */
+            border: none; /* No border for the main video container */
             margin-bottom: 30px;
             border-radius: 8px; /* Rounded corners for embed box */
-            /* Add responsive aspect ratio for embeds */
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width) */
             height: 0;
@@ -74,6 +72,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            border: none;
         }
         .movie-link {
             display: inline-block;
@@ -122,7 +121,7 @@
             text-decoration: underline;
         }
 
-        /* Styles for Movie Cards (from previous immersive, adapted to your style) */
+        /* Styles for Movie Cards in the grid */
         .movie-card {
             background-color: #2d3748; /* Darker card background */
             border-radius: 8px;
@@ -131,24 +130,51 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
-            height: 100%; /* Ensure cards are same height in a grid */
+            /* width: 250px; /* Optional: Set a fixed width if desired, but grid handles this */
         }
         .movie-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
-        .movie-poster {
+
+        /* Specific styles for .trailer-embed within a .movie-card (for fixed height media) */
+        .movie-card .trailer-embed {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Fixed height for consistency with movie posters */
+            padding-bottom: 0; /* Override responsive padding for fixed height */
+            overflow: hidden;
+            background-color: #000;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex; /* For centering the iframe */
+            align-items: center;
+            justify-content: center;
+            padding: 0; /* Ensure no extra padding around thumbnail/video */
+            border: none; /* No border for the media area itself */
+        }
+        .movie-card .trailer-embed iframe {
+            position: static; /* Let flexbox handle positioning */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Will letterbox 16:9 video in 2:3 space */
+            border: none;
+        }
+
+        .movie-poster { /* Keep this for image-based cards */
             width: 100%;
             height: 300px; /* Fixed height for consistency */
             object-fit: cover; /* Cover the area, cropping if necessary */
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
         }
+
         .movie-info {
             padding: 1rem;
-            flex-grow: 1; /* Allows info section to expand */
+            flex-grow: 1; /* Allow info section to grow if needed */
             display: flex;
             flex-direction: column;
+            justify-content: flex-start; /* Aligns content to the start */
         }
         .movie-title {
             font-size: 2.2rem; /* Increased font size for prominence */
@@ -161,7 +187,8 @@
             font-size: 1.1em; /* Increased font size for better readability */
             color: #f0f0f0; /* Brighter text for better contrast */
             line-height: 1.6; /* Adjusted line height for readability */
-            flex-grow: 1; /* Allows description to take available space */
+            flex-grow: 0; /* Prevent description from growing unnecessarily */
+            margin-bottom: 0.5rem; /* Small margin to separate from button */
         }
         .movie-card-link { /* New style for button within movie card */
             display: inline-block;
@@ -172,7 +199,7 @@
             text-align: center;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 1rem;
+            margin-top: auto; /* Pushes the button to the bottom of the flex container */
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .movie-card-link:hover {
@@ -186,6 +213,56 @@
             text-align: center; /* This will center inline-block elements like h2 */
             margin-top: 40px; /* Consistent spacing between content blocks */
         }
+
+        /* Styles for the video thumbnail and play button overlay */
+        .trailer-embed-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: #000; /* Ensures black background if image delays */
+            display: flex; /* For centering content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+
+        .trailer-embed-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .trailer-embed-placeholder:hover img {
+            opacity: 0.8; /* Dim the image slightly on hover */
+        }
+
+        .trailer-embed-play-button {
+            position: absolute;
+            width: 60px; /* Size of the play button */
+            height: 42px; /* Aspect ratio for YouTube-like button */
+            background-color: rgba(255, 0, 0, 0.8); /* Red, slightly transparent */
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none; /* Allows clicks to pass through to the parent placeholder */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .trailer-embed-placeholder:hover .trailer-embed-play-button {
+            transform: scale(1.1); /* Slightly enlarge button on hover */
+        }
+
+        .trailer-embed-play-button::before {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 18px; /* Creates a play triangle */
+            border-color: transparent transparent transparent #fff; /* White triangle */
+        }
+
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -206,6 +283,19 @@
                 padding: 12px 25px;
                 font-size: 1em;
             }
+            /* Adjust grid for smaller screens */
+            .grid-cols-1 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .sm\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .lg\:grid-cols-4 { /* This will be the default for larger screens */
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -222,16 +312,17 @@
 <body>
     <div class="container">
         <!-- Logo path updated to go up one level to the images folder -->
-              
+        <!-- <img src="../images/mr_movies_logo.png" alt="Mr. Movies Logo" class="logo"> -->
 
-       <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
-    <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
-    <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
-    <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
-    <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
-    <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
-    
-</nav>
+        <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
+            <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
+            <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
+            <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
+            <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
+            <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
+            <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
+            <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
+        </nav>
 
         <h1 style="color: #e50914; font-size: 3.5em; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">
             Mr. Movies: Western Trailers & Film Insights
@@ -243,122 +334,208 @@
             Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site:MovieHub!</a>
         </p>
 
-        <!-- TRAILERS SECTION for Sci-Fi Movies -->
-        <div class="content">
-            <h2>Featured Western The Old Way 2023 </h2>
-            <br>
-            <p>An old gunslinger and his daughter must face the consequences of his past, when the son of a man he murdered years ago arrives to take his revenge.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="/eWakq9qQ6Ik?si=xkjkzNLoleguGeFy">
-            </div>
-            <p>Ready to experience the movie?</p>
-            <p style="text-align: center; margin-top: 30px; font-size: 1.2em; font-weight: bold;">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Old-Way" class="movie-link parent-site-link">Watch The Old way on The MovieHub!</a>
-            </p>
-        </div>
-
-        <div class="content">
-            <h2>Featured Sci-Fi Trailer: Lumina 2025 (OFFICIAL TRAILER)"</h2>
-            <p>Lumina follows four friends desperately searching for their abductee friend in a DUMB. Whether they find their friend or not in the deserts of the US to the sands of the Sahara, will change their lives forever.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="PYhOTxxDCdU">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Lumina" class="movie-link">Watch Lumina on MovieHub</a>
-        </div>
-        <div class="content">
-            <h2>Featured Sci-Fi Trailer: Prometheus 2012 (OFFICIAL TRAILER)"</h2>
-            <p>Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="yA6OKoW30Pk">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Prometheus" class="movie-link">Watch Prometheus on MovieHub</a>
-        </div>
-        <!-- END TRAILERS SECTION -->
-
-        <!-- MOVIE POSTERS GRID for Sci-Fi Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Sci-Fi Movies</h2>
-        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8">
-            <!-- Sci-Fi Movie Card 1: Alien Romulus -->
+        <!-- MOVIE POSTERS GRID for Western Movies -->
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Western Movies</h2>
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Movie Card 1: The Old Way (from original featured) -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Alien-Romulus">
-                    <img src="../images/alien_romulus_poster.jpg" alt="Alien Romulus Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="eWakq9qQ6Ik"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Alien Romulus</h3>
-                    <p class="movie-description">
-                        While scavenging a derelict space station, young space colonists face the universe's most terrifying life form.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Alien-Romulus" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">The Old Way (2023)</h3>
+                    <p class="movie-description">An old gunslinger and his daughter must face the consequences of his past, when the son of a man he murdered years ago arrives to take his revenge.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Old-Way" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Sci-Fi Movie Card 2: Interstellar -->
+            <!-- Movie Card 2: Rust (from original featured) -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Interstellar">
-                    <img src="../images/interstellar_poster.jpg" alt="Interstellar Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="NWnmUj5dRrM"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Interstellar</h3>
-                    <p class="movie-description">
-                        A team of explorers travels through a wormhole in space in an attempt to ensure humanity's survival.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Interstellar" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Rust (2025)</h3>
+                    <p class="movie-description">An orphaned boy of 13 left to fend for himself and his younger brother in 1880s Wyoming is sentenced to hang for the accidental killing of a local rancher. His estranged grandfather breaks him out of jail and they go on the run to Mexico.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Rust" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Sci-Fi Movie Card 3: Blade Runner 2049 -->
+            <!-- Movie Card 3: Gunslingers (from original featured) -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Blade-Runner-2049">
-                    <img src="../images/blade_runner_poster.jpg" alt="Blade Runner 2049 Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="G4hVWe4GOrk"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Blade Runner 2049</h3>
-                    <p class="movie-description">
-                        A young blade runner's discovery of a long-buried secret leads him to track down former blade runner Rick Deckard.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Blade-Runner-2049" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Gunslingers (2025)</h3>
+                    <p class="movie-description">In a town named Redemption, reformed gunslinger Keller and mad genius Ben are guided by spiritual leader Jericho towards vindication. While confronting their violent histories, their newfound peace is challenged by violence and revenge.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Gunslingers" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Sci-Fi Movie Card 4: Dune -->
+            <!-- Movie Card 4: Ghost Town (from original featured) -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Dune">
-                    <img src="../images/dune_poster.jpg" alt="Dune Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="Zp9IMQ0FTnI"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Dune</h3>
-                    <p class="movie-description">
-                        A gifted young man must travel to the most dangerous planet in the universe to ensure the future of his family and his people.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Dune" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Ghost Town (2023)</h3>
+                    <p class="movie-description">In the untamed West of Victorian-era America, a drifter takes a job as a barman in a small Arizona town. After a series of bizarre deaths, he soon finds himself the target of suspicion.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Ghost-Town" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Sci-Fi Movie Card 5: Quadrant (NEW) -->
+            <!-- Movie Card 5: Birthright Outlaw -->
             <div class="movie-card">
-                <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Quadrant">
-                    <!-- Image path is relative to the root of your Mr-Movies site -->
-                    <img src="../images/Quadrant.jpg" alt="Quadrant Movie Poster" class="movie-poster" onerror="this.onerror=null;this.src='https://placehold.co/500x750/374151/9CA3AF?text=No+Image';">
-                </a>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="Lalpei-B5pk"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Quadrant</h3>
-                    <p class="movie-description">
-                        A group of astronauts finds themselves stranded in a mysterious and hostile quadrant of space, fighting for survival against unknown threats.
-                    </p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Quadrant" class="movie-card-link">
-                        View Trailer & More
-                    </a>
+                    <h3 class="movie-title">Birthright Outlaw (2023)</h3>
+                    <p class="movie-description">A daughter kidnapped. A hidden past revealed. A seemingly futile chance at rescue. Now, Rev. Jeremiah Jacobs and his wife Martha must overcome the lies of the past to find their Hope for the future.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Birthright-Outlaw" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Add more Sci-Fi movie cards here following the same structure -->
+            <!-- Movie Card 6: The 5 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="cdwT6lYSWGI"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The 5 (2023)</h3>
+                    <p class="movie-description">Five outlaws hide out after robbing a bank. The longer they wait for the woman with their share of the money to arrive, the more suspicion starts to grow. When a gun goes missing, everyone is left to ask, Who is the traitor?</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Five" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 7: The Good, the Bad and the Ugly -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="ItUo1d_G2Gg"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Good, the Bad and the Ugly (1966)</h3>
+                    <p class="movie-description">A bounty hunter, a ruthless outlaw, and a Mexican bandit form an uneasy alliance to find a buried treasure during the Civil War.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Good-the-Bad-and-the-Ugly" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 8: Once Upon a Time in the West -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="M0fK2s_yT4Q"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Once Upon a Time in the West (1968)</h3>
+                    <p class="movie-description">A mysterious stranger with a harmonica joins forces with a notorious outlaw to protect a beautiful widow from a ruthless assassin.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Once-Upon-a-Time-in-the-West" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 9: Unforgiven -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="l_U24l40W_4"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Unforgiven (1992)</h3>
+                    <p class="movie-description">Retired Old West gunslinger William Munny reluctantly takes on one last job with the help of his old partner and a young man.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Unforgiven" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 10: Django Unchained -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="0fA_hV_l4Yg"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Django Unchained (2012)</h3>
+                    <p class="movie-description">With the help of a German bounty hunter, a freed slave sets out to rescue his wife from a brutal Mississippi plantation owner.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Django-Unchained" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 11: True Grit -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="C_Wb_z_z8eI"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">True Grit (2010)</h3>
+                    <p class="movie-description">A determined teenage girl enlists the help of a tough U.S. Marshal and a Texas Ranger to track down her father's killer.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=True-Grit" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 12: The Hateful Eight -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="6_n1_k_l2m3"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Hateful Eight (2015)</h3>
+                    <p class="movie-description">In the dead of a Wyoming winter, a bounty hunter and his prisoner find shelter in a cabin currently inhabited by a collection of nefarious characters.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Hateful-Eight" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 13: Tombstone -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="O-oQ_e_g7h8"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Tombstone (1993)</h3>
+                    <p class="movie-description">A successful lawman's attempt to live a quiet life is interrupted by a gang of outlaws.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Tombstone" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 14: High Noon -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="k_l9m0n1o2p"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">High Noon (1952)</h3>
+                    <p class="movie-description">A retiring marshal must face a gang of killers alone when his town abandons him.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=High-Noon" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 15: Butch Cassidy and the Sundance Kid -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="r_s3t4u5v6w"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Butch Cassidy and the Sundance Kid (1969)</h3>
+                    <p class="movie-description">Two notorious outlaws flee to Bolivia after a train robbery goes wrong.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Butch-Cassidy-and-the-Sundance-Kid" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 16: The Wild Bunch -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="x_y7z8a9b0c"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Wild Bunch (1969)</h3>
+                    <p class="movie-description">An aging outlaw gang seeks one last score in a changing American West.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Wild-Bunch" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 17: Shane -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="d_e1f2g3h4i"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Shane (1953)</h3>
+                    <p class="movie-description">A mysterious gunfighter comes to the aid of a family of homesteaders in a valley terrorized by a ruthless cattle baron.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Shane" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 18: 3:10 to Yuma -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="j_k5l6m7n8o"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">3:10 to Yuma (2007)</h3>
+                    <p class="movie-description">A small-time rancher agrees to transport a dangerous outlaw to a train that will take him to prison, but their journey is fraught with peril.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=3-10-to-Yuma" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 19: No Country for Old Men -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="p_q9r0s1t2u"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">No Country for Old Men (2007)</h3>
+                    <p class="movie-description">Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and takes a briefcase full of money.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=No-Country-for-Old-Men" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 20: The Magnificent Seven -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="v_w3x4y5z6a"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Magnificent Seven (1960)</h3>
+                    <p class="movie-description">Seven gunfighters are hired to protect a small Mexican village from a group of marauding bandits.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Magnificent-Seven" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
@@ -370,44 +547,96 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Video Lazy Loading Script ---
             const videoEmbeds = document.querySelectorAll('.trailer-embed[data-platform][data-videoid]');
 
             videoEmbeds.forEach(embedDiv => {
                 const platform = embedDiv.getAttribute('data-platform');
-                const videoId = embedDiv.getAttribute('data-videoid');
-                let iframeSrc = '';
-                
-                if (platform === 'youtube') {
-                    // Standard YouTube embed URL format
-                    iframeSrc = `https://www.youtube.com/embed/${videoId}?rel=0`; // rel=0 prevents related videos
-                } else if (platform === 'okru') {
-                    // OK.ru embed URL format (this is a common one, but may vary)
-                    // You might need to adjust the width/height or embed code if your OK.ru videos have a different format
-                    iframeSrc = `https://ok.ru/videoembed/${videoId}`; 
-                } else if (platform === 'mega') {
-                    // IMPORTANT: Mega.nz embeds are complex and often require specific embed codes
-                    // or direct file links that may not be publicly embeddable.
-                    // You might need to manually get the embed code from Mega for each video.
-                    // This is a placeholder and might not work directly with just the video ID.
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
-                    // Example (this is highly unlikely to work without proper Mega embed code):
-                    // iframeSrc = `https://mega.nz/embed/${videoId}`; 
-                    // For now, if Mega, it will show an error message.
-                }
+                const rawVideoId = embedDiv.getAttribute('data-videoid');
+                // Clean up the ID: remove leading '/', and any '?si=' parameters
+                const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
 
-                if (iframeSrc) {
+                if (platform === 'youtube' && videoId) {
+                    console.log('Found YouTube embed div. Video ID:', videoId);
+
+                    // Create the placeholder elements (thumbnail + play button)
+                    const placeholder = document.createElement('div');
+                    placeholder.classList.add('trailer-embed-placeholder');
+                    // Use hqdefault.jpg for reliability
+                    placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+                    placeholder.style.backgroundSize = 'cover';
+                    placeholder.style.backgroundPosition = 'center';
+
+                    const playButton = document.createElement('div');
+                    playButton.classList.add('trailer-embed-play-button');
+
+                    placeholder.appendChild(playButton);
+                    embedDiv.appendChild(placeholder);
+                    console.log('Placeholder created and appended for video ID:', videoId);
+
+                    // Add click listener to load the actual iframe
+                    placeholder.addEventListener('click', function() {
+                        console.log('Placeholder clicked for video ID:', videoId);
+                        const iframe = document.createElement('iframe');
+                        // Autoplay is set to 1 as it works on sci-fi.html
+                        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.setAttribute('allowfullscreen', '');
+                        iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
+
+                        console.log('Attempting to load YouTube video with ID:', videoId); // Log for debugging
+
+                        // Replace the placeholder with the iframe
+                        try {
+                            embedDiv.replaceChild(iframe, placeholder);
+                            console.log('Successfully replaced placeholder with iframe for video ID:', videoId);
+                        } catch (e) {
+                            console.error('Error replacing placeholder with iframe for video ID', videoId, ':', e);
+                            embedDiv.innerHTML = `
+                                <p style="color:red; text-align:center; padding:20px;">
+                                    This video cannot be embedded here, likely due to YouTube's restrictions.
+                                    <br>
+                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
+                                </p>
+                            `;
+                        }
+                    });
+
+                } else if (platform === 'okru' && videoId) {
+                    // For OK.ru, directly embed a smaller placeholder or keep current method
                     const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', iframeSrc);
+                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
                     iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'); // Added web-share for modern embeds
+                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
                     iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('title', `Video player for ${platform} ID: ${videoId}`); // Add a title for accessibility
-
-                    // Clear existing content and append iframe
+                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
                     embedDiv.innerHTML = '';
                     embedDiv.appendChild(iframe);
+                } else if (platform === 'mega') {
+                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
-                    embedDiv.innerHTML = '<p style="color:red;">Error: Unsupported video platform or missing ID.</p>';
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
+                }
+            });
+
+            // --- Current page genre button removal logic ---
+            const pathSegments = window.location.pathname.split('/');
+            const currentPageFileName = pathSegments[pathSegments.length - 1].split('.')[0]; 
+            
+            const navLinks = document.querySelectorAll('nav .movie-link');
+
+            navLinks.forEach(link => {
+                const linkFileName = link.getAttribute('href').split('/').pop().split('.')[0];
+                
+                const isHomePath = (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html'));
+                const isHomeLink = link.getAttribute('href').endsWith('index.html') || link.getAttribute('href') === '../index.html';
+
+                if (isHomePath && isHomeLink) {
+                    link.style.display = 'none'; // Hide Home button on Home page
+                } else if (linkFileName === currentPageFileName) {
+                    link.style.display = 'none'; // Hide the button for the current genre page
                 }
             });
         });
