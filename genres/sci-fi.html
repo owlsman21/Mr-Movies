@@ -263,6 +263,39 @@
             border-color: transparent transparent transparent #fff; /* White triangle */
         }
 
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15;
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -296,6 +329,10 @@
             .lg\:grid-cols-4 { /* This will be the default for larger screens */
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -317,6 +354,7 @@
         <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
             <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
             <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
+            <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
             <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
             <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
             <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
@@ -333,12 +371,12 @@
             Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site: MovieHub! For Full Movies</a>
         </p>
 
-        <!-- MOVIE POSTERS GRID for Western Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Sci-Fi Movies</h2>
+        <!-- MOVIE POSTERS GRID for Sci-Fi Movies -->
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Sci-Fi Movies (Page 1)</h2>
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Movie Card 1: Lumina  (from original featured) -->
+            <!-- Movie Card 1: Lumina (from original featured) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="IeAoLoiJ4HI?si=bFJCNvCVC5SNL9If"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="IeAoLoiJ4HI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Lumina (2024)</h3>
                     <p class="movie-description"> Lumina follows four friends desperately searching for their abductee friend in a DUMB. Whether they find their friend or not in the deserts of the US to the sands of the Sahara, will change their lives forever.</p>
@@ -346,9 +384,9 @@
                 </div>
             </div>
 
-            <!-- Movie Card 2: Guardians of the Galaxy 3(from original featured) -->
+            <!-- Movie Card 2: Guardians of the Galaxy 3 (from original featured) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="JqcncLPi9zw?si=uKvmfMT6bTUUwo8A"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="JqcncLPi9zw"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Guardians of the Galaxy 3 (2023)</h3>
                     <p class="movie-description">Still reeling from the loss of Gamora, Peter Quill rallies his team to defend the universe and one of their own - a mission that could mean the end of the Guardians if not successful.</p>
@@ -356,9 +394,9 @@
                 </div>
             </div>
 
-            <!-- Movie Card 3: 2.0 Lucy(from original featured) -->
+            <!-- Movie Card 3: 2.0 Lucy (from original featured) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="uJyps9HwNFw?si=Pnn6egmfd1W179HO"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="uJyps9HwNFw"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">2.0 Lucy (2022)</h3>
                     <p class="movie-description">When a disgraced palaeoanthropologist travels to a rural outback, to obsessively pursue his unorthodox research, his discovery will challenge the delusional idea that we humans are the master species.</p>
@@ -368,7 +406,7 @@
 
             <!-- Movie Card 4: Dragon Soldiers (from original featured) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="ryc7BPGPBII?si=yHUOrl7mz-Bl4AlT"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="ryc7BPGPBII"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Dragon Soldiers Full Movie (2020)</h3>
                     <p class="movie-description">A group of soldiers must fight mythical creatures in a fantastical setting.</p>
@@ -378,7 +416,7 @@
 
             <!-- Movie Card 5: Snowpiercer -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="nX5PwfEMBM0?si=GmiBCLVQ1f3M6meD"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="nX5PwfEMBM0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Snowpiercer (2020)</h3>
                     <p class="movie-description">Seven years after the world has become a frozen wasteland, the remnants of humanity inhabit a perpetually-moving train that circles the globe, where class warfare, social injustice, and the politics of survival play out.</p>
@@ -388,7 +426,7 @@
 
             <!-- Movie Card 6: In the Tall Grass -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="7afc9gTbVFI?si=qnXLKIjh8vlVKE9Z"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="7afc9gTbVFI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">In the Tall Grass (2019)</h3>
                     <p class="movie-description">After hearing a young boy's cry for help, a sister and brother venture into a vast field of tall grass in Kansas but soon discover there may be no way out...and that something evil lurks within.</p>
@@ -398,7 +436,7 @@
 
             <!-- Movie Card 7: beond skyline 2018 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="M2w1HMGaqFM?si=ZjQFQKPiqeM2ZHoI"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="M2w1HMGaqFM"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">beond skyline 2018 (2018)</h3>
                     <p class="movie-description">Detective Mark Corley storms his way onto an alien spaceship to rescue his estranged son. When the ship crashes in Southeast Asia, he forges an alliance with a band of survivors to take back the planet once and for all.</p>
@@ -408,7 +446,7 @@
 
             <!-- Movie Card 8: Freaks 2018 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="BEEVk3jkyFc?si=uAYte5ecL3y5MgOR"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="BEEVk3jkyFc"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Freaks 2018 (2018)</h3>
                     <p class="movie-description">A bold girl discovers a bizarre, threatening, and mysterious new world beyond her front door after she escapes her father's protective and paranoid control.</p>
@@ -418,7 +456,7 @@
 
             <!-- Movie Card 9: The Shape of Water -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="XFYWazblaUA?si=KptYTCr_NT-MlCKt"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="XFYWazblaUA"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Shape of Water (2017)</h3>
                     <p class="movie-description"> At a top secret research facility in the 1960s, a lonely janitor forms a unique relationship with an amphibious creature that is being held in captivity..</p>
@@ -428,7 +466,7 @@
 
             <!-- Movie Card 10: urge -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/hPzqKBs5CZ0?si=8W_bCz-POBQ7BLjj"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="hPzqKBs5CZ0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">urge (2016)</h3>
                     <p class="movie-description">An island getaway turns deadly when a mysterious nightclub owner (Pierce Brosnan) introduces a group of friends to a drug that can't be taken more than one time.</p>
@@ -438,7 +476,7 @@
 
             <!-- Movie Card 11: The Unseen 2016 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/nGX5KHYzWqk?si=55LDw5ur-fuaIcX1"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="nGX5KHYzWqk"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Unseen (2016)</h3>
                     <p class="movie-description">A man who abandoned his family now risks everything to find his missing daughter, including exposing the secret that he is becoming invisible.</p>
@@ -448,7 +486,7 @@
 
             <!-- Movie Card 12: Star Trek Beyond -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="XRVD32rnzOw?si=rXMsdKTPbssouI4e"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="XRVD32rnzOw"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Star Trek Beyond (2016)</h3>
                     <p class="movie-description">The crew of the USS Enterprise explores the furthest reaches of uncharted space, where they encounter a new ruthless enemy, who puts them, and everything the Federation stands for, to the test.</p>
@@ -458,7 +496,7 @@
 
             <!-- Rogue One A Star Wars Story -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/frdj1zb9sMY?si=meMbbnbvkf8qUv3r"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="frdj1zb9sMY"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Rogue One A Star Wars Story (2016)</h3>
                     <p class="movie-description">In a time of conflict, a group of unlikely heroes band together on a mission to steal the plans to the Death Star, the Empire's ultimate weapon of destruction.</p>
@@ -468,7 +506,7 @@
 
             <!-- Left Behind 2014 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="GrXe8YDbzYs?si=9Lz7TkM2EhdLQq0n"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="GrXe8YDbzYs"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Left Behind (2014)</h3>
                     <p class="movie-description">A small group of survivors is left behind after millions of people suddenly vanish and the world is plunged into chaos and destruction.</p>
@@ -478,7 +516,7 @@
 
             <!-- Movie Card 15: The Quiet Hour 2014 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="rgmpaY1h9JI?si=M0cpKByjD_aIaU1Q"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="rgmpaY1h9JI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Quiet Hour Full Movie (2014)</h3>
                     <p class="movie-description"> In the aftermath of an alien invasion, a feisty teenage girl sets out to protect her farm from human scavengers who will stop at nothing in order to survive in a post-apocalyptic world.</p>
@@ -488,19 +526,19 @@
 
             <!-- Movie Card 16: Leave the World Behind 2013 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="cMVBi_e8o-Y?si=b1BqPvjtcilLHVNT"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="cMVBi_e8o-Y"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Leave the World Behind  (2013)</h3>
+                    <h3 class="movie-title">Leave the World Behind (2013)</h3>
                     <p class="movie-description"> A family's getaway to a luxurious rental home takes an ominous turn when a cyberattack knocks out their devices, and two strangers appear at their door.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Leave%20the%20World%20Behind" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Leave-the-World-Behind" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
             <!-- Movie Card 17: Frequencies (2013) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/t785KAovrv4?si=yKRbnKwo_cS2npXm"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="t785KAovrv4"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Frequencies  Full Movie (2013)</h3>
+                    <h3 class="movie-title">Frequencies Full Movie (2013)</h3>
                     <p class="movie-description"> In an alternate reality, children learn how lucky they will be (their frequency), knowledge which shapes their destiny. The unluckiest boy must parse the mysteries of free will in order to pursue his forbidden love of the luckiest girl</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Frequencies" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -508,7 +546,7 @@
 
             <!-- Movie Card 18: Star Trek Into Darkness -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="QAEkuVgt6Aw?si=-WAL8-ZvU8wUKnwq"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="QAEkuVgt6Aw"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Star Trek Into Darkness (2013)</h3>
                     <p class="movie-description"> After the crew of the Enterprise find an unstoppable force of terror from within their own organization, Captain Kirk leads a manhunt to a war-zone world to capture a one-man weapon of mass destruction.</p>
@@ -518,7 +556,7 @@
 
             <!-- Movie Card 19: Promitheus (2012) - Popular Blockbuster Superhit Full Movie in 1080p HD Quality Bluray -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="JSZsYcLpVng?si=WOY5Q5kvLNMWpBHj"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="JSZsYcLpVng"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Promitheus Full Movie 1080 (2012)</h3>
                     <p class="movie-description">The discovery of a clue to mankind's origins on Earth leads a team of explorers to the darkest parts of the universe. Two brilliant young scientists lead the expedition. Shaw (Noomi Rapace) hopes that they will meet a race of benevolent, godlike beings who will in some way verify her religious beliefs, while Holloway (Logan Marshall-Green) is out to debunk any spiritual notions. However, neither the scientists nor their shipmates are prepared for the unimaginable terrors that await them.</p>
@@ -528,7 +566,7 @@
 
             <!-- Movie Card 20: Limitless -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/Ym9ATQxz0o0?si=dqNkTgXlOo_NxzlK"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="Ym9ATQxz0o0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Limitless Full movie in HD (2011)</h3>
                     <p class="movie-description">A mysterious pill that enables the user to access 100% of his brain's abilities transforms a struggling writer into a financial wizard, but it also puts him in a new world with many dangers</p>
@@ -538,6 +576,14 @@
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
+
+        <!-- Pagination for Page 1 -->
+        <div class="pagination">
+            <span class="disabled">Previous</span>
+            <span class="current-page">1</span>
+            <a href="sci-fi-page2.html">2</a>
+            <a href="sci-fi-page2.html">Next</a>
+        </div>
 
         <div class="footer">
             <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Movies - Western Trailers & Stories</title>
+    <title>Mr. Movies - Western Trailers & Stories (Page 1)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -130,7 +130,6 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
-            /* width: 250px; /* Optional: Set a fixed width if desired, but grid handles this */
         }
         .movie-card:hover {
             transform: translateY(-5px);
@@ -263,6 +262,39 @@
             border-color: transparent transparent transparent #fff; /* White triangle */
         }
 
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15; /* Brighter red on hover */
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -296,6 +328,10 @@
             .lg\:grid-cols-4 { /* This will be the default for larger screens */
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -321,7 +357,7 @@
             <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
             <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
             <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
-          
+            <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
         </nav>
 
         <h1 style="color: #e50914; font-size: 3.5em; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">
@@ -335,7 +371,7 @@
         </p>
 
         <!-- MOVIE POSTERS GRID for Western Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Western Movies</h2>
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Western Movies (Page 1)</h2>
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Movie Card 1: The Old Way (from original featured) -->
             <div class="movie-card">
@@ -407,7 +443,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 8: Calamity Jane   2024 -->
+            <!-- Movie Card 8: Calamity Jane   2024 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="hmy5R9qmfu8"></div>
                 <div class="movie-info">
@@ -447,7 +483,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 12: Mohawk  2018 -->
+            <!-- Movie Card 12: Mohawk  2018 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="r3fRRP9ufgw"></div>
                 <div class="movie-info">
@@ -471,13 +507,13 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="CxFEkK3w9Ok"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Night of the Tommyknockers  (2022)</h3>
+                    <h3 class="movie-title">Night of the Tommyknockers  (2022)</h3>
                     <p class="movie-description">When miners blast for gold in the 1870's, they accidentally release ancient creatures known as Tommyknockers. The Town of Deer Creek, Nevada is soon under siege with only a handful of survivors held up in the local saloon.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Night-of-the-Tommyknockers" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 15: Butch vs Sundance   2023-->
+            <!-- Movie Card 15: Butch vs Sundance   2023-->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="1uNiAQxTbhg"></div>
                 <div class="movie-info">
@@ -487,7 +523,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 16: Murder at Yellowstone City  2022-->
+            <!-- Movie Card 16: Murder at Yellowstone City  2022-->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="sH3eMuDhbCU"></div>
                 <div class="movie-info">
@@ -497,7 +533,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 17: Above Snakes  2022 -->
+            <!-- Movie Card 17: Above Snakes  2022 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="Kr_OWKF0qBY"></div>
                 <div class="movie-info">
@@ -507,7 +543,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 18: The Last Victim  2022 -->
+            <!-- Movie Card 18: The Last Victim  2022 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="_x_VD5b5FPA"></div>
                 <div class="movie-info">
@@ -517,7 +553,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 19: Union  2019 -->
+            <!-- Movie Card 19: Union  2019 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="Zder_aK4qn8"></div>
                 <div class="movie-info">
@@ -539,6 +575,14 @@
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
+
+        <!-- Pagination for Page 1 -->
+        <div class="pagination">
+            <span class="disabled">Previous</span>
+            <span class="current-page">1</span>
+            <a href="western-page2.html">2</a>
+            <a href="western-page2.html">Next</a>
+        </div>
 
         <div class="footer">
             <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>
@@ -589,54 +633,17 @@
 
                         // Replace the placeholder with the iframe
                         try {
-                            embedDiv.replaceChild(iframe, placeholder);
-                            console.log('Successfully replaced placeholder with iframe for video ID:', videoId);
-                        } catch (e) {
-                            console.error('Error replacing placeholder with iframe for video ID', videoId, ':', e);
-                            embedDiv.innerHTML = `
-                                <p style="color:red; text-align:center; padding:20px;">
-                                    This video cannot be embedded here, likely due to YouTube's restrictions.
-                                    <br>
-                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
-                                </p>
-                            `;
+                            embedDiv.innerHTML = ''; // Clear the placeholder
+                            embedDiv.appendChild(iframe); // Add the iframe
+                            console.log('YouTube iframe loaded for video ID:', videoId);
+                        } catch (error) {
+                            console.error('Error loading YouTube iframe:', error);
+                            // Fallback message if iframe fails to load
+                            embedDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading video. Please try again later.</p>';
                         }
                     });
-
-                } else if (platform === 'okru' && videoId) {
-                    // For OK.ru, directly embed a smaller placeholder or keep current method
-                    const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
-                    embedDiv.innerHTML = '';
-                    embedDiv.appendChild(iframe);
-                } else if (platform === 'mega') {
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
-                }
-            });
-
-            // --- Current page genre button removal logic ---
-            const pathSegments = window.location.pathname.split('/');
-            const currentPageFileName = pathSegments[pathSegments.length - 1].split('.')[0]; 
-            
-            const navLinks = document.querySelectorAll('nav .movie-link');
-
-            navLinks.forEach(link => {
-                const linkFileName = link.getAttribute('href').split('/').pop().split('.')[0];
-                
-                const isHomePath = (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html'));
-                const isHomeLink = link.getAttribute('href').endsWith('index.html') || link.getAttribute('href') === '../index.html';
-
-                if (isHomePath && isHomeLink) {
-                    link.style.display = 'none'; // Hide Home button on Home page
-                } else if (linkFileName === currentPageFileName) {
-                    link.style.display = 'none'; // Hide the button for the current genre page
+                    console.warn('Skipping embed for invalid platform or video ID:', platform, videoId);
                 }
             });
         });

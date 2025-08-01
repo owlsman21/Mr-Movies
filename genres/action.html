@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Movies - Action Trailers & Stories</title>
+    <title>Mr. Movies - Action Trailers & Stories (Page 1)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -130,7 +130,6 @@
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             display: flex;
             flex-direction: column;
-            /* width: 250px; /* Optional: Set a fixed width if desired, but grid handles this */
         }
         .movie-card:hover {
             transform: translateY(-5px);
@@ -263,6 +262,39 @@
             border-color: transparent transparent transparent #fff; /* White triangle */
         }
 
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15;
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -296,6 +328,10 @@
             .lg\:grid-cols-4 { /* This will be the default for larger screens */
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -316,6 +352,7 @@
 
         <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
             <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
+            <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
             <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
             <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
             <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
@@ -333,40 +370,8 @@
             Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site: MovieHub! For Full Movies</a>
         </p>
 
-        <!-- Main Featured Trailer Sections (Removed as per user request) -->
-        <!--
-        <div class="content">
-            <h2>Featured Trailer: Falling Down </h2>
-            <p>An ordinary man frustrated with the various flaws he sees in society begins to psychotically and violently lash out against them</p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="hlzm7-gvTRg">
-            </div>
-            <p>Intrigued? Watch the full movie now on our main site:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Falling-Down" class="movie-link">Watch Falling Down on MovieHub</a>
-        </div>
-
-        <div class="content">
-            <h2>Featured Trailer: THE BAYOU 2025 (OFFICIAL TRAILER)"</h2>
-            <p>Vacation turns disaster when Houston grad, Kyle and her friends escape a plane crash in the desolate Louisiana everglades, only to discover there's something way more dangerous lurking in the shallowst.
-            </p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="yWNwdsXIBks">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Bayou" class="movie-link">Watch The BAYOU on MovieHub</a>
-        </div>
-        <div class="content">
-            <h2>Featured Trailer: Snowtown 2011 (OFFICIAL TRAILER)"</h2>
-            <p>Based on true events, 16-year-old Jamie falls in with his mother's new boyfriend and his crowd of self-appointed neighborhood watchmen, a relationship that leads to a spree of torture and murder.
-            </p>
-            <div class="trailer-embed" data-platform="youtube" data-videoid="OXgxhH01ea0">
-            </div>
-            <p> Stream the full movie:</p>
-            <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Snowtown-Murders" class="movie-link">Watch Snowtown on MovieHub</a>
-        </div>
-        -->
-        <!-- END TRAILERS SECTION -->
-
         <!-- MOVIE POSTERS GRID for Action Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Action Movies</h2>
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Action Movies (Page 1)</h2>
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Movie Card 1: Falling Down -->
             <div class="movie-card">
@@ -400,7 +405,7 @@
 
             <!-- Movie Card 4: KO 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="7ECPKBH88No?si=cnBbNiboiKaQzjbe"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="7ECPKBH88No"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">KO (2025)</h3>
                     <p class="movie-description">After accidentally killing his rival in an MMA bout, a man has the chance to make it up to the widow by finding her son.</p>
@@ -410,7 +415,7 @@
 
             <!-- Movie Card 5: Diablo 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/jGrxJgQrYYY?si=EIMWVoDFPRl3ngNO"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="jGrxJgQrYYY"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Diablo (2025)</h3>
                     <p class="movie-description">Kris Chaney, a recently released ex-convict embarks on a perilous mission. He kidnaps Elisa, daughter of Vicente, a powerful gangster, which puts them in danger from El Corvo, a psychopathic killer seeking revenge against Vicente's family.</p>
@@ -420,7 +425,7 @@
 
             <!-- Movie Card 6: The Sound 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="ssgBxnRL2_w?si=1gtBWKdy2f9GZkQp"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="ssgBxnRL2_w"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Sound (2025)</h3>
                     <p class="movie-description">A group of climbers embarks on a dangerous climb that has been off-limits for years. What initially begins as an audacious expedition transforms into a battle for survival against a force that toys with them.</p>
@@ -430,7 +435,7 @@
 
             <!-- Movie Card 7: Ballerina 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="yNN2PoilSp4?si=NkMmkzxLEsp07dUV"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="yNN2PoilSp4"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Ballerina (2025)</h3>
                     <p class="movie-description">An assassin trained in the traditions of the Ruska Roma organization sets out to seek revenge after her father's death.</p>
@@ -440,7 +445,7 @@
 
             <!-- Movie Card 8: Old Guard 2 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="lyivgZ074PY?si=TV8nj2bdbwLl8YkU"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="lyivgZ074PY"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Old Guard 2 (2025)</h3>
                     <p class="movie-description">Andy leads immortal warriors against a powerful enemy threatening their group. They grapple with the resurfacing of a long-lost immortal, complicating their mission to safeguard humanity.</p>
@@ -450,7 +455,7 @@
 
             <!-- Movie Card 9: Thunderbolts 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="xjo664EVnX8?si=N5mlxkEknoYR1wBF"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="xjo664EVnX8"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Thunderbolts (2025)</h3>
                     <p class="movie-description">After finding themselves ensnared in a death trap, an unconventional team of antiheroes must go on a dangerous mission that will force them to confront the darkest corners of their pasts.</p>
@@ -458,9 +463,9 @@
                 </div>
             </div>
 
-            <!-- Movie Card 10: Mad Max: Fury Road -->
+            <!-- Movie Card 10: ICE ROAD 2: Vengeance Official Trailer (2025) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="4p4dX4U82SI?si=KaFNUaalVZ40S41T"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="4p4dX4U82SI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">ICE ROAD 2: Vengeance Official Trailer (2025)</h3>
                     <p class="movie-description"> Mike travels to Nepal to scatter his late brother's ashes on Mt. Everest. When Mike and his mountain guide encounter mercenaries on a tour bus, they are forced to fight to save themselves, the passengers, and the local villagers' homeland.</p>
@@ -468,29 +473,29 @@
                 </div>
             </div>
 
-            <!-- Movie Card 11: John Wick -->
+            <!-- Movie Card 11: The Death of Snow White (2025) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="3iH57bQXsys?si=J3ESD4GAK8Z47Fzw"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="3iH57bQXsys"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Death of Snow White (2025)</h3>
                     <p class="movie-description"> Pursued by her stepmother for eternal beauty, Snow White flees into a terrifying forest and aligns with seven bloodthirsty dwarves - cold-blooded assassins with a knack for brutal killings. Her spirit is tested in this grim fairy tale.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=John-Wick" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Death-of-Snow-White" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 12: The Dark Knight -->
+            <!-- Movie Card 12: ONE MORE SHOT (2024) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/GjMfH3zqaNI?si=RBcIjWhs6jQmCZXe"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="GjMfH3zqaNI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">ONE MORE SHOT (2024) | Trailer </h3>
                     <p class="movie-description">Following the attack on the black site in Poland, Navy SEAL Jake Harris is ordered to escort terrorist suspect Amin Mansur to Washington D.C for interrogation.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=One%20More%20Shot" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=One-More-Shot" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 13: Inception -->
+            <!-- Movie Card 13: Crossfire 2022 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="hVuAzATZszQ?si=uHvwvmMafAtYXnxI"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="hVuAzATZszQ"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Crossfire 2022</h3>
                     <p class="movie-description">After a shooting, Jo's family vacations turns into turmoil.</p>
@@ -498,19 +503,19 @@
                 </div>
             </div>
 
-            <!-- Movie Card 14: Mission: Impossible - Fallout -->
+            <!-- Movie Card 14: Mega Twister full movie (2024) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="FwWC1tI7fTA?si=3cLWYCHREFyTJHCb"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="FwWC1tI7fTA"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Mega Twister full movie (2024)</h3>
                     <p class="movie-description">When AI-induced tornadoes ravage the UK, a tornado-chasing couple attempts to curb the chaos as a mercenary group tries to steal the technology.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Mega%20Twister" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Mega-Twister" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 15: Die Hard -->
+            <!-- Movie Card 15: KINGSLAYER (2022) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="GcokGNuzFtM?si=2M_-qG20tl1ryXy-"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="GcokGNuzFtM"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">KINGSLAYER (2022) Official Trailer </h3>
                     <p class="movie-description">the Lionheart, before he ascended to become King of England, as he must fight for his life and learn the responsibilities of leadership amidst a treacherous ambush.</p>
@@ -518,9 +523,9 @@
                 </div>
             </div>
 
-            <!-- Movie Card 16: Edge of Tomorrow -->
+            <!-- Movie Card 16: Bring Him Back Dead (2022) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="3MIE0ysqG0E?si=T9cBlm-ugq0dATtD"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="3MIE0ysqG0E"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Bring Him Back Dead (2022) | FULL ACTION MOVIE</h3>
                     <p class="movie-description">A violent gang of criminals is ordered, after a botched heist, to track down and eliminate the man who betrayed them and ran off with their loot. Daniels plays the anti-hero, while Mandylor plays the leader of the gang and Baldwin a man with mysterious motives.</p>
@@ -528,9 +533,9 @@
                 </div>
             </div>
 
-            <!-- Movie Card 17: Baby Driver -->
+            <!-- Movie Card 17: Darkness Falls (2020) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="03Cr2fXXvxo?si=sU7CtmbHui4hCFBo"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="03Cr2fXXvxo"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Darkness Falls (2020)</h3>
                     <p class="movie-description"> After his wife's suicide, Detective Jeff Anderson becomes convinced that she has been murdered. Obsessed with his investigation, he finds out that his wife was the victim of a team of father-and-son serial killers and sets out to stop them.</p>
@@ -538,29 +543,29 @@
                 </div>
             </div>
 
-            <!-- Movie Card 18: The Raid -->
+            <!-- Movie Card 18: The Old Guard (2020) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="/aK-X2d0lJ_s?si=832w3IemPpIj-HdM"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="aK-X2d0lJ_s"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Old Guard (2020)</h3>
                     <p class="movie-description">A covert group of tight-knit mercenaries with an inability to die have fought to protect the world for centuries. But when their abilities are suddenly exposed, they need to eliminate the threat of those who seek to replicate their power.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The%20Old%20Guard" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Old-Guard" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 19: Dredd -->
+            <!-- Movie Card 19: Outlaw King (2018) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="wHpO9AG_dkE?si=stiENYTi-o0z25Ps"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="wHpO9AG_dkE"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Outlaw King (2018)</h3>
                     <p class="movie-description">A true David vs. Goliath story of how the 14th century Scottish 'Outlaw King' Robert the Bruce used cunning and bravery to defeat the much larger and better equipped occupying English army.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Outlaw%20King" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Outlaw-King" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 20: Extraction -->
+            <!-- Movie Card 20: Brawl in Cell Block 99 (2017) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="5hfAExhHTMM?si=I_VqKR71QgnbgshT"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="5hfAExhHTMM"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Brawl in Cell Block 99 (2017)</h3>
                     <p class="movie-description">A former boxer and drug runner ends up in a brutal prison, forced to make impossible choices.</p>
@@ -570,6 +575,14 @@
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
+
+        <!-- Pagination for Page 1 -->
+        <div class="pagination">
+            <span class="disabled">Previous</span>
+            <span class="current-page">1</span>
+            <a href="action-page2.html">2</a>
+            <a href="action-page2.html">Next</a>
+        </div>
 
         <div class="footer">
             <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>
@@ -588,8 +601,6 @@
                 const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
 
                 if (platform === 'youtube' && videoId) {
-                    console.log('Found YouTube embed div. Video ID:', videoId);
-
                     // Create the placeholder elements (thumbnail + play button)
                     const placeholder = document.createElement('div');
                     placeholder.classList.add('trailer-embed-placeholder');
@@ -603,52 +614,27 @@
 
                     placeholder.appendChild(playButton);
                     embedDiv.appendChild(placeholder);
-                    console.log('Placeholder created and appended for video ID:', videoId);
 
                     // Add click listener to load the actual iframe
                     placeholder.addEventListener('click', function() {
-                        console.log('Placeholder clicked for video ID:', videoId);
                         const iframe = document.createElement('iframe');
-                        // Autoplay is set to 1 as it works on sci-fi.html
                         iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
                         iframe.setAttribute('frameborder', '0');
                         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
                         iframe.setAttribute('allowfullscreen', '');
                         iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
 
-                        console.log('Attempting to load YouTube video with ID:', videoId); // Log for debugging
-
-                        // Replace the placeholder with the iframe
                         try {
-                            embedDiv.replaceChild(iframe, placeholder);
-                            console.log('Successfully replaced placeholder with iframe for video ID:', videoId);
-                        } catch (e) {
-                            console.error('Error replacing placeholder with iframe for video ID', videoId, ':', e);
-                            embedDiv.innerHTML = `
-                                <p style="color:red; text-align:center; padding:20px;">
-                                    This video cannot be embedded here, likely due to YouTube's restrictions.
-                                    <br>
-                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
-                                </p>
-                            `;
+                            embedDiv.innerHTML = ''; // Clear the placeholder
+                            embedDiv.appendChild(iframe); // Add the iframe
+                        } catch (error) {
+                            console.error('Error loading YouTube iframe:', error);
+                            // Fallback message if iframe fails to load
+                            embedDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading video. Please try again later.</p>';
                         }
                     });
-
-                } else if (platform === 'okru' && videoId) {
-                    // For OK.ru, directly embed a smaller placeholder or keep current method
-                    const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
-                    embedDiv.innerHTML = '';
-                    embedDiv.appendChild(iframe);
-                } else if (platform === 'mega') {
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
+                    console.warn('Skipping embed for invalid platform or video ID:', platform, videoId);
                 }
             });
 

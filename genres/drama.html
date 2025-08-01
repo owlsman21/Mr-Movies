@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Movies - Drama Trailers & Stories</title>
+    <title>Mr. Movies - Drama Trailers & Stories (Page 1)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -263,6 +263,39 @@
             border-color: transparent transparent transparent #fff; /* White triangle */
         }
 
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15;
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -296,6 +329,10 @@
             .lg\:grid-cols-4 { /* This will be the default for larger screens */
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -320,6 +357,7 @@
             <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
             <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
             <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
+            <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
             <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
         </nav>
 
@@ -336,11 +374,11 @@
         <!-- Main Featured Trailer Section (Removed as per user request) -->
 
         <!-- MOVIE POSTERS GRID for Drama Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Drama Movies</h2>
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Drama Movies (Page 1)</h2>
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Movie Card 1 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="PLl99DlL6b4?si=mO-TX-3jvFTZhJr5"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="PLl99DlL6b4"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Shawshank Redemption</h3>
                     <p class="movie-description">Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.</p>
@@ -348,11 +386,11 @@
                 </div>
             </div>
 
-            <!-- Movie Card 2  Abduct 20925 -->
+            <!-- Movie Card 2 Abduct 20925 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="5DcOf6FRRB8"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Abduct  (2025)</h3>
+                    <h3 class="movie-title">Abduct (2025)</h3>
                     <p class="movie-description">A woman's peaceful mountain getaway takes a bizarre turn when her boyfriend disappears, and a random naked man shows up claiming to be him</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Abduct" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -388,7 +426,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 6  Drop 2025 -->
+            <!-- Movie Card 6 Drop 2025 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="bs_nFwh5eJw"></div>
                 <div class="movie-info">
@@ -424,7 +462,7 @@
                 <div class="movie-info">
                     <h3 class="movie-title">Sharp Corner (2024)</h3>
                     <p class="movie-description"> A dedicated family man becomes obsessed with saving the lives of the car accident victims on the sharp corner in front of his house an obsession that could cost him everything.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Sharp%20Corner" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Sharp-Corner" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
@@ -434,15 +472,15 @@
                 <div class="movie-info">
                     <h3 class="movie-title">The Nanny (2023)</h3>
                     <p class="movie-description">A wealthy couple hire a young girl from Finland to take care of their newborn. These new parents should be in a state of bliss, so why does it seem like they are trying to kill each other?</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The%20Nanny" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Nanny" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 11  The Bikeriders 2023 -->
+            <!-- Movie Card 11 The Bikeriders 2023 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="BrSaVt5pvPk"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">The Bikeriders  (2023)</h3>
+                    <h3 class="movie-title">The Bikeriders (2023)</h3>
                     <p class="movie-description">After a chance encounter, headstrong Kathy is drawn to Benny, member of Midwestern motorcycle club the Vandals. As the club transforms into a dangerous underworld of violence, Benny must choose between Kathy and his loyalty to the club.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Bikeriders" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -452,7 +490,7 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="eV5bmNoo4GU"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title"> Homestead (2024)  </h3>  
+                    <h3 class="movie-title"> Homestead (2024) </h3>
                     <p class="movie-description">In 1983, a summer romance blossoms between a 17-year-old American-Italian boy and an older American scholar.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Homestead" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -470,7 +508,7 @@
 
             <!-- Movie Card 14 Girl in Room 13 (2022)-->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="-wS2WI9bleE?si=IQ84z5Hg6s7qEnxi"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="-wS2WI9bleE"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Girl in Room 13 (2022)</h3>
                     <p class="movie-description">Grace becomes addicted to opioids after suffering a sports injury. She's ready to leave her addiction behind under her mother's watch, but her past won't let her go: Richie kidnaps her in a motel room to sell her into human trafficking.</p>
@@ -488,7 +526,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 16  Prey (2021) -->
+            <!-- Movie Card 16 Prey (2021) -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="HzpLBkLb4ak"></div>
                 <div class="movie-info">
@@ -502,27 +540,27 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="NaB_ERMAZu4"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">The Guilty  (2021)</h3>
+                    <h3 class="movie-title">The Guilty (2021)</h3>
                     <p class="movie-description">A demoted police officer assigned to a call dispatch desk is conflicted when he receives an emergency phone call from a kidnapped woman.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/A demoted police officer assigned to a call dispatch desk is conflicted when he receives an emergency phone call from a kidnapped woman." class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Guilty" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 18 Darkness Falls  2020-->
+            <!-- Movie Card 18 Darkness Falls 2020-->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="AvfIEfzqEM0"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Darkness Falls  (2020)</h3>
+                    <h3 class="movie-title">Darkness Falls (2020)</h3>
                     <p class="movie-description"> After his wife's suicide, Detective Jeff Anderson becomes convinced that she has been murdered. Obsessed with his investigation, he finds out that his wife was the victim of a team of father-and-son serial killers and sets out to stop them.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Darkness-Falls" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
-            <!-- Movie Card 19 Snowpiercer  2020-->
+            <!-- Movie Card 19 Snowpiercer 2020-->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="lGcJL6TG5cA"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Snowpiercer  (2020)</h3>
+                    <h3 class="movie-title">Snowpiercer (2020)</h3>
                     <p class="movie-description">Seven years after the world has become a frozen wasteland, the remnants of humanity inhabit a perpetually-moving train that circles the globe, where class warfare, social injustice, and the politics of survival play out.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Snowpiercer" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -532,7 +570,7 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="D2zdFwgUYBg"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Stan and Ollie  (2019)</h3>
+                    <h3 class="movie-title">Stan and Ollie (2019)</h3>
                     <p class="movie-description"> Laurel and Hardy, the world's most famous comedy duo, attempt to reignite their film careers as they embark on what becomes their swan song - a gruelling theatre tour of post-war Britain.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Stan-and-Ollie" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -540,6 +578,14 @@
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
+
+        <!-- Pagination for Page 1 -->
+        <div class="pagination">
+            <span class="disabled">Previous</span>
+            <span class="current-page">1</span>
+            <a href="drama-page2.html">2</a>
+            <a href="drama-page2.html">Next</a>
+        </div>
 
         <div class="footer">
             <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>
@@ -554,14 +600,15 @@
             videoEmbeds.forEach(embedDiv => {
                 const platform = embedDiv.getAttribute('data-platform');
                 const rawVideoId = embedDiv.getAttribute('data-videoid');
-                const videoId = rawVideoId.split('?')[0].replace('/', ''); // Clean up the ID
+                // Clean up the ID: remove leading '/', and any '?si=' parameters
+                const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
 
                 if (platform === 'youtube' && videoId) {
                     // Create the placeholder elements (thumbnail + play button)
                     const placeholder = document.createElement('div');
                     placeholder.classList.add('trailer-embed-placeholder');
-                    // Use maxresdefault.jpg for highest quality, falls back to hqdefault
-                    placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg), url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+                    // Use hqdefault.jpg for reliability
+                    placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
                     placeholder.style.backgroundSize = 'cover';
                     placeholder.style.backgroundPosition = 'center';
 
@@ -580,26 +627,17 @@
                         iframe.setAttribute('allowfullscreen', '');
                         iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
 
-                        // Remove placeholder and append iframe
-                        embedDiv.innerHTML = ''; // Clear the placeholder
-                        embedDiv.appendChild(iframe);
+                        try {
+                            embedDiv.innerHTML = ''; // Clear the placeholder
+                            embedDiv.appendChild(iframe); // Add the iframe
+                        } catch (error) {
+                            console.error('Error loading YouTube iframe:', error);
+                            // Fallback message if iframe fails to load
+                            embedDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading video. Please try again later.</p>';
+                        }
                     });
-
-                } else if (platform === 'okru' && videoId) {
-                    // For OK.ru, directly embed a smaller placeholder or keep current method
-                    const iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
-                    embedDiv.innerHTML = '';
-                    embedDiv.appendChild(iframe);
-                } else if (platform === 'mega') {
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
-                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
+                    console.warn('Skipping embed for invalid platform or video ID:', platform, videoId);
                 }
             });
 

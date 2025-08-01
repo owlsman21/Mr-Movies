@@ -263,6 +263,39 @@
             border-color: transparent transparent transparent #fff; /* White triangle */
         }
 
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15;
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -296,6 +329,10 @@
             .lg\:grid-cols-4 { /* This will be the default for larger screens */
                 grid-template-columns: repeat(4, minmax(0, 1fr));
             }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
         }
     </style>
     <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
@@ -319,6 +356,7 @@
             <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
             <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
             <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
+            <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
             <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
             <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
         </nav>
@@ -334,7 +372,7 @@
         </p>
 
         <!-- MOVIE POSTERS GRID for Horror Movies -->
-        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Horror Movies</h2>
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Horror Movies (Page 1)</h2>
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Movie Card 1: Ouija : A New Beginning (from original featured) -->
             <div class="movie-card">
@@ -368,7 +406,7 @@
 
             <!-- Movie Card 4: The Exorcist -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="BU2eYAO31Cc?si=hz-LtI3osH4GiEJS"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="BU2eYAO31Cc"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Exorcist (1973)</h3>
                     <p class="movie-description">When a teenage girl is possessed by a mysterious entity, her mother seeks the help of two priests to save her daughter.</p>
@@ -376,15 +414,13 @@
                 </div>
             </div>
 
-            <!-- Movie Card 5: Bone Face (2025)
- -->
+            <!-- Movie Card 5: Bone Face (2025) -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="68p842mlAJA"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Bone Face (2025)
-</h3>
+                    <h3 class="movie-title">Bone Face (2025)</h3>
                     <p class="movie-description">When a masked killer slaughters several campers in a small town, a sheriff and a deputy track the murderer to a local diner where, using their investigative skills, they must discover which person in the diner is the actual killer.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Bone%20Face" class="movie-card-link">View Full Movie Here</a>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Bone-Face" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
@@ -410,7 +446,7 @@
 
             <!-- Movie Card 8: A Nightmare on Elm Street -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="CBcVZcornjI?si=kNmeNFaQ66IUJQUm"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="CBcVZcornjI"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">A Nightmare on Elm Street (1984)</h3>
                     <p class="movie-description">Teenagers in a small town are being targeted by a serial killer who murders them in their dreams.</p>
@@ -418,13 +454,14 @@
                 </div>
             </div>
 
-            <!-- Movie Card 9: The Conjuring -->
+            <!-- Movie Card 9: The Death of Snow White
+-->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="k10ETZ41q5o"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="c35Mi8ogKDQ"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">The Conjuring (2013)</h3>
-                    <p class="movie-description">Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.</p>
-                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Conjuring" class="movie-card-link">View Full Movie Here</a>
+                    <h3 class="movie-title">The Death of Snow White(2013)</h3>
+                    <p class="movie-description">Pursued by her stepmother for eternal beauty, Snow White flees into a terrifying forest and aligns with seven bloodthirsty dwarves - cold-blooded assassins with a knack for brutal killings. Her spirit is tested in this grim fairy tale.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The%20Death%20of%20Snow%20White" class="movie-card-link">View Full Movie Here</a>
                 </div>
             </div>
 
@@ -442,7 +479,7 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="WqRc7vKkGrc"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Womb  (2025)</h3>
+                    <h3 class="movie-title">Womb (2025)</h3>
                     <p class="movie-description">Trapped in a remote hunting cabin, a pregnant recovering addict battles to escape the clutches of a deranged hunter obsessed with abducting her full term fetus.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Womb" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -450,7 +487,7 @@
 
             <!-- Movie Card 12: It (2017) -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="8i3_2iGTQi8?si=QlPKCzq36wYh6yde"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="8i3_2iGTQi8"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">It (2017)</h3>
                     <p class="movie-description">Seven young outcasts in Derry, Maine, are about to face their worst nightmare -- an ancient, shape-shifting evil that emerges from the sewer every 27 years to prey on the town's children.</p>
@@ -460,7 +497,7 @@
 
             <!-- Movie Card 13: The Babadook -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="k5WQZzDRVtw?si=GL2GYew5tiQZXUMF"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="k5WQZzDRVtw"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Babadook (2014)</h3>
                     <p class="movie-description">A single mother, plagued by the violent death of her husband, battles with her son's fear of a monster lurking in the house, but soon discovers a sinister presence all around her.</p>
@@ -468,7 +505,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 14:Unspeakable Beyond the Wall of Sleep 2025  -->
+            <!-- Movie Card 14:Unspeakable Beyond the Wall of Sleep 2025 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="b8hTRd_2-5k"></div>
                 <div class="movie-info">
@@ -482,7 +519,7 @@
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="eGWtYeHnM9U"></div>
                 <div class="movie-info">
-                    <h3 class="movie-title">The Sound  (2025)</h3>
+                    <h3 class="movie-title">The Sound (2025)</h3>
                     <p class="movie-description">A group of climbers embarks on a dangerous climb that has been off-limits for years. What initially begins as an audacious expedition transforms into a battle for survival against a force that toys with them.</p>
                     <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Sound" class="movie-card-link">View Full Movie Here</a>
                 </div>
@@ -508,7 +545,7 @@
                 </div>
             </div>
 
-            <!-- Movie Card 18: Bring Her Back  2025 -->
+            <!-- Movie Card 18: Bring Her Back 2025 -->
             <div class="movie-card">
                 <div class="trailer-embed" data-platform="youtube" data-videoid="kBskrYZfhw8"></div>
                 <div class="movie-info">
@@ -520,7 +557,7 @@
 
             <!-- Movie Card 19: The Other 2025 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="-I9XxZJ4JBU?si=0ZBP06wRCXnPPMfW"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="-I9XxZJ4JBU"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Other (2025)</h3>
                     <p class="movie-description">Unable to conceive, a couple seeks to build a family with a young orphan, survivor of a tragic childhood. But their act of love turns to horror when they realize the violence in their foster's past has returned to destroy the new family.</p>
@@ -540,6 +577,14 @@
 
         </section>
         <!-- END MOVIE POSTERS GRID -->
+
+        <!-- Pagination for Page 1 -->
+        <div class="pagination">
+            <span class="disabled">Previous</span>
+            <span class="current-page">1</span>
+            <a href="horror-page2.html">2</a>
+            <a href="horror-page2.html">Next</a>
+        </div>
 
         <div class="footer">
             <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>
