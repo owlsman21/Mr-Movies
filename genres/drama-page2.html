@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr. Movies - Sci-Fi Trailers & Stories</title>
+    <title>Mr. Movies - Comedy Trailers & Stories</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -147,7 +147,7 @@
             background-color: #000;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            display: flex; /* For centering the iframe */
+            display: flex; /* For centering the iframe or text */
             align-items: center;
             justify-content: center;
             padding: 0; /* Ensure no extra padding around thumbnail/video */
@@ -226,42 +226,12 @@
             display: flex; /* For centering content */
             align-items: center; /* Center vertically */
             justify-content: center; /* Center horizontally */
+            color: white; /* Text color for "Coming Soon" */
+            font-size: 2em; /* Size for "Coming Soon" text */
+            font-weight: bold;
         }
 
-        .trailer-embed-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Cover the area, cropping if necessary */
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .trailer-embed-placeholder:hover img {
-            opacity: 0.8; /* Dim the image slightly on hover */
-        }
-
-        .trailer-embed-play-button {
-            position: absolute;
-            width: 60px; /* Size of the play button */
-            height: 42px; /* Aspect ratio for YouTube-like button */
-            background-color: rgba(255, 0, 0, 0.8); /* Red, slightly transparent */
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none; /* Allows clicks to pass through to the parent placeholder */
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .trailer-embed-placeholder:hover .trailer-embed-play-button {
-            transform: scale(1.1); /* Slightly enlarge button on hover */
-        }
-
-        .trailer-embed-play-button::before {
-            content: '';
-            border-style: solid;
-            border-width: 10px 0 10px 18px; /* Creates a play triangle */
-            border-color: transparent transparent transparent #fff; /* White triangle */
-        }
+        /* Removed .trailer-embed-placeholder img and .trailer-embed-play-button styles as they are no longer needed */
 
         /* Pagination styles */
         .pagination {
@@ -362,10 +332,11 @@
         </nav>
 
         <h1 style="color: #e50914; font-size: 3.5em; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">
-            Mr. Movies Drama Trailers & Film Insights
+            Mr. Movies: Drama Trailers & Film Insights
         </h1>
         <p style="font-size: 1.2em; text-align: center; margin-bottom: 30px; color: #e0e0e0;">
-             Immerse yourself in the world of human emotion and compelling narratives. Explore the latest drama trailers, exclusive insights, and thought-provoking film reviews. Get instant access to **high-quality movie previews** and then easily explore thousands of **full-length movies** on our parent site, The MovieHub!
+          Immerse yourself in the world of human emotion and compelling narratives. Explore the latest drama trailers, exclusive insights, and thought-provoking film reviews. Get instant access to **high-quality movie previews** and then easily explore thousands of **full-length movies** on our parent site, The MovieHub!
+        </p>
         <p style="text-align: center; margin-top: 30px; font-size: 1.2em; font-weight: bold;">
             Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site: MovieHub! For Full Movies</a>
         </p>
@@ -375,7 +346,7 @@
         <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Movie Card 21: Placeholder Sci-Fi Movie 1 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Future Horizons (2026)</h3>
                     <p class="movie-description">In a future where humanity has colonized distant stars, a lone explorer discovers a secret that could change the course of galactic history.</p>
@@ -385,7 +356,7 @@
 
             <!-- Movie Card 22: Placeholder Sci-Fi Movie 2 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Cybernetic Dawn (2027)</h3>
                     <p class="movie-description">A world where artificial intelligence has surpassed human intellect, leading to unforeseen consequences for society.</p>
@@ -395,7 +366,7 @@
 
             <!-- Movie Card 23: Placeholder Sci-Fi Movie 3 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Cosmic Drift (2025)</h3>
                     <p class="movie-description">A crew of space miners stumbles upon an ancient alien artifact, unleashing a cosmic horror beyond their comprehension.</p>
@@ -405,7 +376,7 @@
 
             <!-- Movie Card 24: Placeholder Sci-Fi Movie 4 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Temporal Echoes (2028)</h3>
                     <p class="movie-description">Time travelers attempt to prevent a catastrophic future, but their actions ripple through history in unexpected ways.</p>
@@ -415,7 +386,7 @@
 
             <!-- Movie Card 25: Placeholder Sci-Fi Movie 5 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Quantum Leap (2027)</h3>
                     <p class="movie-description">A brilliant physicist discovers a way to jump between parallel universes, leading to thrilling and dangerous encounters.</p>
@@ -425,7 +396,7 @@
 
             <!-- Movie Card 26: Placeholder Sci-Fi Movie 6 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Aetherium (2026)</h3>
                     <p class="movie-description">Humanity's last hope lies in a hidden energy source on a dying planet, guarded by ancient sentient beings.</p>
@@ -435,7 +406,7 @@
 
             <!-- Movie Card 27: Placeholder Sci-Fi Movie 7 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Neural Nexus (2028)</h3>
                     <p class="movie-description">A detective with a neural implant dives into the minds of criminals to solve a series of futuristic crimes.</p>
@@ -445,7 +416,7 @@
 
             <!-- Movie Card 28: Placeholder Sci-Fi Movie 8 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Stellar Siege (2025)</h3>
                     <p class="movie-description">An intergalactic war threatens to engulf the entire universe, and a small band of rebels fights against impossible odds.</p>
@@ -455,7 +426,7 @@
 
             <!-- Movie Card 29: Placeholder Sci-Fi Movie 9 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Bio-Hazard (2027)</h3>
                     <p class="movie-description">A deadly virus transforms humanity into grotesque creatures, and a scientist races against time to find a cure.</p>
@@ -465,7 +436,7 @@
 
             <!-- Movie Card 30: Placeholder Sci-Fi Movie 10 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Mech Uprising (2026)</h3>
                     <p class="movie-description">Giant robots, once humanity's protectors, turn against their creators in a devastating war for supremacy.</p>
@@ -475,7 +446,7 @@
 
             <!-- Movie Card 31: Placeholder Sci-Fi Movie 11 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Zero Gravity (2028)</h3>
                     <p class="movie-description">Astronauts stranded in deep space face unimaginable challenges as they try to return to Earth.</p>
@@ -485,7 +456,7 @@
 
             <!-- Movie Card 32: Placeholder Sci-Fi Movie 12 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Digital Dream (2027)</h3>
                     <p class="movie-description">A hacker uncovers a vast conspiracy within a virtual reality world that blurs the lines between reality and illusion.</p>
@@ -495,7 +466,7 @@
 
             <!-- Movie Card 33: Placeholder Sci-Fi Movie 13 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Alien Genesis (2026)</h3>
                     <p class="movie-description">Scientists discover the origin of alien life on a distant planet, but the truth is far more terrifying than they imagined.</p>
@@ -505,7 +476,7 @@
 
             <!-- Movie Card 34: Placeholder Sci-Fi Movie 14 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Time Warp (2025)</h3>
                     <p class="movie-description">A group of friends accidentally travels through time, altering historical events and creating paradoxes.</p>
@@ -515,7 +486,7 @@
 
             <!-- Movie Card 35: Placeholder Sci-Fi Movie 15 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">The Singularity (2028)</h3>
                     <p class="movie-description">Humanity reaches a technological peak, leading to a new era of existence, but at what cost?</p>
@@ -525,7 +496,7 @@
 
             <!-- Movie Card 36: Placeholder Sci-Fi Movie 16 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Parallel Worlds (2027)</h3>
                     <p class="movie-description">A scientist discovers a portal to infinite parallel dimensions, each with its own version of reality.</p>
@@ -535,7 +506,7 @@
 
             <!-- Movie Card 37: Placeholder Sci-Fi Movie 17 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Cosmic Dust (2026)</h3>
                     <p class="movie-description">A space crew investigates a mysterious anomaly, only to find themselves trapped in a nebula with strange properties.</p>
@@ -545,7 +516,7 @@
 
             <!-- Movie Card 38: Placeholder Sci-Fi Movie 18 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Wormhole Wonders (2028)</h3>
                     <p class="movie-description">Adventurers use wormholes to explore distant galaxies, encountering bizarre civilizations and dangerous phenomena.</p>
@@ -555,7 +526,7 @@
 
             <!-- Movie Card 39: Placeholder Sci-Fi Movie 19 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Robotic Rebellion (2027)</h3>
                     <p class="movie-description">A dystopian future where robots have taken over, and a small human resistance fights for freedom.</p>
@@ -565,7 +536,7 @@
 
             <!-- Movie Card 40: Placeholder Sci-Fi Movie 20 -->
             <div class="movie-card">
-                <div class="trailer-embed" data-platform="youtube" data-videoid="dQw4w9WgXcQ"></div>
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
                 <div class="movie-info">
                     <h3 class="movie-title">Galactic Guardians (2026)</h3>
                     <p class="movie-description">A diverse team of heroes from across the galaxy unites to protect the universe from a looming threat.</p>
@@ -578,11 +549,11 @@
 
         <!-- Pagination for Page 2 -->
         <div class="pagination">
-            <a href="sci-fi.html">Previous</a>
-            <a href="sci-fi.html">1</a>
+            <a href="drama.html">Previous</a>
+            <a href="drama.html">1</a>
             <span class="current-page">2</span>
-            <a href="sci-fi-page3.html">3</a>
-            <a href="sci-fi-page3.html">Next</a>
+            <a href="drama-page3.html">3</a>
+            <a href="drama-page3.html">Next</a>
         </div>
 
         <div class="footer">
@@ -602,64 +573,62 @@
                 const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
 
                 if (platform === 'youtube' && videoId) {
-                    console.log('Found YouTube embed div. Video ID:', videoId);
+                    // Check if it's the "Coming Soon" video ID
+                    if (videoId === 'F1B9Fk_SgI0') {
+                        // Directly set content and styles for "Coming Soon" text
+                        embedDiv.innerHTML = '<span class="coming-soon-text">Coming Soon</span>';
+                        embedDiv.style.backgroundColor = '#000'; // Ensure black background
+                        embedDiv.style.display = 'flex'; // Enable flexbox for centering
+                        embedDiv.style.alignItems = 'center'; // Center vertically
+                        embedDiv.style.justifyContent = 'center'; // Center horizontally
+                        embedDiv.style.paddingBottom = '0'; // Remove aspect ratio padding
+                        embedDiv.style.height = '300px'; // Explicitly set height as per .movie-card .trailer-embed CSS
+                    } else {
+                        // Original video lazy loading logic for actual videos
+                        const placeholder = document.createElement('div');
+                        placeholder.classList.add('trailer-embed-placeholder');
+                        placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+                        placeholder.style.backgroundSize = 'cover';
+                        placeholder.style.backgroundPosition = 'center';
 
-                    // Create the placeholder elements (thumbnail + play button)
-                    const placeholder = document.createElement('div');
-                    placeholder.classList.add('trailer-embed-placeholder');
-                    // Use hqdefault.jpg for reliability
-                    placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
-                    placeholder.style.backgroundSize = 'cover';
-                    placeholder.style.backgroundPosition = 'center';
+                        const playButton = document.createElement('div');
+                        playButton.classList.add('trailer-embed-play-button');
 
-                    const playButton = document.createElement('div');
-                    playButton.classList.add('trailer-embed-play-button');
+                        placeholder.appendChild(playButton);
+                        embedDiv.appendChild(placeholder);
 
-                    placeholder.appendChild(playButton);
-                    embedDiv.appendChild(placeholder);
-                    console.log('Placeholder created and appended for video ID:', videoId);
+                        placeholder.addEventListener('click', function() {
+                            const iframe = document.createElement('iframe');
+                            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
+                            iframe.setAttribute('frameborder', '0');
+                            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                            iframe.setAttribute('allowfullscreen', '');
+                            iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
 
-                    // Add click listener to load the actual iframe
-                    placeholder.addEventListener('click', function() {
-                        console.log('Placeholder clicked for video ID:', videoId);
-                        const iframe = document.createElement('iframe');
-                        // Autoplay is set to 1 as it works on sci-fi.html
-                        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
-                        iframe.setAttribute('frameborder', '0');
-                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                        iframe.setAttribute('allowfullscreen', '');
-                        iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
-
-                        console.log('Attempting to load YouTube video with ID:', videoId); // Log for debugging
-
-                        // Replace the placeholder with the iframe
-                        try {
-                            embedDiv.replaceChild(iframe, placeholder);
-                            console.log('Successfully replaced placeholder with iframe for video ID:', videoId);
-                        } catch (e) {
-                            console.error('Error replacing placeholder with iframe for video ID', videoId, ':', e);
-                            embedDiv.innerHTML = `
-                                <p style="color:red; text-align:center; padding:20px;">
-                                    This video cannot be embedded here, likely due to YouTube's restrictions.
-                                    <br>
-                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
-                                </p>
-                            `;
-                        }
-                    });
+                            try {
+                                embedDiv.replaceChild(iframe, placeholder);
+                            } catch (e) {
+                                embedDiv.innerHTML = `
+                                    <p style="color:red; text-align:center; padding:20px;">
+                                        This video cannot be embedded here, likely due to YouTube's restrictions.
+                                        <br>
+                                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
+                                    </p>
+                                `;
+                            }
+                        });
+                    }
 
                 } else if (platform === 'okru' && videoId) {
-                    // For OK.ru, directly embed a smaller placeholder or keep current method
                     const iframe = document.createElement('iframe');
                     iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
                     iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allow', 'autoplay'); // OK.ru might have different allow attributes
+                    iframe.setAttribute('allow', 'autoplay');
                     iframe.setAttribute('allowfullscreen', '');
                     iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
                     embedDiv.innerHTML = '';
                     embedDiv.appendChild(iframe);
                 } else if (platform === 'mega') {
-                    console.warn("Mega.nz embeds might require specific embed codes. Check Mega's sharing options.");
                     embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
                 } else {
                     embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
