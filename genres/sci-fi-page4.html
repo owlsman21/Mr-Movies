@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Movies - Sci-Fi Trailers & Stories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif; /* Modern body font */
+            margin: 0; /* Remove default body margin */
+            background-color: #1a1a1a; /* Dark background for a cinematic feel */
+            color: #f0f0f0; /* Light text for contrast */
+            line-height: 1.8; /* Increased line height for readability */
+        }
+        .container {
+            max-width: 960px; /* Slightly wider container */
+            margin: 40px auto; /* More margin top/bottom */
+            background-color: #2b2b2b; /* Slightly lighter dark background for container */
+            padding: 40px;
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5); /* Stronger, darker shadow */
+            position: relative; /* Needed for pseudo-elements if we add them later */
+            overflow: hidden; /* Clear floats */
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif; /* Elegant heading font */
+            color: #e50914; /* Netflix red, bold for impact */
+            text-align: center; /* Ensures h1 and h2 are centered */
+            margin-bottom: 25px;
+            letter-spacing: 1.5px; /* Add some spacing to headings */
+        }
+        h1 {
+            font-size: 3em; /* Larger main heading */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Slight text shadow */
+        }
+        h2 {
+            margin-top: 40px;
+            font-size: 5.5em; /* Significantly increased font size for h2 */
+            padding-bottom: 10px;
+            display: inline-block; /* To make border-bottom only as wide as text */
+        }
+        p {
+            margin-bottom: 18px;
+            font-size: 1.1em; /* Slightly larger paragraph text */
+        }
+        .logo {
+            max-width: 300px; /* Larger logo */
+            height: auto;
+            display: block;
+            margin: 0 auto 40px auto; /* Center the logo with more space */
+        }
+        /* General trailer-embed styles (for main featured trailers) */
+        /* These styles will now only apply if you add a standalone .trailer-embed elsewhere */
+        .trailer-embed {
+            background-color: #000; /* Black background for video embeds */
+            padding: 0; /* No padding around the video itself */
+            border: none; /* No border for the main video container */
+            margin-bottom: 30px;
+            border-radius: 8px; /* Rounded corners for embed box */
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width) */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        .trailer-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .movie-link {
+            display: inline-block;
+            background-color: #e50914; /* Red button */
+            color: white;
+            padding: 15px 30px; /* Larger padding */
+            text-decoration: none;
+            border-radius: 8px; /* More rounded corners for button */
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1em; /* Slightly larger button text */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .movie-link:hover {
+            background-color: #f40a15; /* Brighter red on hover */
+            transform: translateY(-3px); /* More pronounced lift effect */
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); /* Shadow on hover */
+        }
+        /* Specific style for the "Visit our Parent Site" button if it needs to be blue */
+        .parent-site-link {
+            background-color: #007bff; /* Blue button */
+            margin-top: 30px; /* More space above it */
+            font-size: 1.3em; /* Larger text for this prominent link */
+            padding: 18px 35px; /* Larger padding */
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .parent-site-link:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid #444; /* Darker border */
+            color: #bbb;
+            font-size: 0.95em;
+        }
+        .footer a {
+            color: #007bff; /* Blue for footer links */
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styles for Movie Cards in the grid */
+        .movie-card {
+            background-color: #2d3748; /* Darker card background */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            /* width: 250px; /* Optional: Set a fixed width if desired, but grid handles this */
+        }
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Specific styles for .trailer-embed within a .movie-card (for fixed height media) */
+        .movie-card .trailer-embed {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Fixed height for consistency with movie posters */
+            padding-bottom: 0; /* Override responsive padding for fixed height */
+            overflow: hidden;
+            background-color: #000;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex; /* For centering the iframe or text */
+            align-items: center;
+            justify-content: center;
+            padding: 0; /* Ensure no extra padding around thumbnail/video */
+            border: none; /* No border for the media area itself */
+        }
+        .movie-card .trailer-embed iframe {
+            position: static; /* Let flexbox handle positioning */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Will letterbox 16:9 video in 2:3 space */
+            border: none;
+        }
+
+        .movie-poster { /* Keep this for image-based cards */
+            width: 100%;
+            height: 300px; /* Fixed height for consistency */
+            object-fit: cover; /* Cover the area, cropping if necessary */
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .movie-info {
+            padding: 1rem;
+            flex-grow: 1; /* Allow info section to grow if needed */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Aligns content to the start */
+        }
+        .movie-title {
+            font-size: 2.2rem; /* Increased font size for prominence */
+            font-weight: bold;
+            color: #e50914; /* Changed to Netflix red for more pop */
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7); /* Enhanced text shadow for depth */
+        }
+        .movie-description {
+            font-size: 1.1em; /* Increased font size for better readability */
+            color: #f0f0f0; /* Brighter text for better contrast */
+            line-height: 1.6; /* Adjusted line height for readability */
+            flex-grow: 0; /* Prevent description from growing unnecessarily */
+            margin-bottom: 0.5rem; /* Small margin to separate from button */
+        }
+        .movie-card-link { /* New style for button within movie card */
+            display: inline-block;
+            background-color: #e50914; /* Red button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Fully rounded */
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: auto; /* Pushes the button to the bottom of the flex container */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .movie-card-link:hover {
+            background-color: #f40a15; /* Brighter red on hover */
+            transform: translateY(-3px); /* More pronounced lift effect */
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); /* Shadow on hover */
+        }
+
+        /* General content block styling to ensure centering of its children */
+        .content {
+            text-align: center; /* This will center inline-block elements like h2 */
+            margin-top: 40px; /* Consistent spacing between content blocks */
+        }
+
+        /* Styles for the video thumbnail and play button overlay */
+        .trailer-embed-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: #000; /* Ensures black background if image delays */
+            display: flex; /* For centering content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            color: white; /* Text color for "Coming Soon" */
+            font-size: 2em; /* Size for "Coming Soon" text */
+            font-weight: bold;
+        }
+
+        /* Removed .trailer-embed-placeholder img and .trailer-embed-play-button styles as they are no longer needed */
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .pagination a, .pagination span {
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination a:hover {
+            background-color: #f40a15;
+            transform: translateY(-2px);
+        }
+        .pagination .current-page {
+            background-color: #e50914;
+            cursor: default;
+        }
+        .pagination .disabled {
+            color: #888;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 3.5em; /* Adjusted for smaller screens, still significantly larger */
+            }
+            .logo {
+                max-width: 200px;
+            }
+            .movie-link, .parent-site-link, .movie-card-link { /* Apply to new button too */
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            /* Adjust grid for smaller screens */
+            .grid-cols-1 {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+            .sm\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            .lg\:grid-cols-4 { /* This will be the default for larger screens */
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+            .pagination a, .pagination span {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <meta name="google-site-verification" content="khpfpQtpY9PovCLDyI3MQhUhoCOvqw9csWkfMj0ViKo" />
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7L0N5B8735"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7L0N5B8735');
+</script>
+<body>
+    <div class="container">
+        <!-- Logo path updated to go up one level to the images folder -->
+        <!-- <img src="../images/mr_movies_logo.png" alt="Mr. Movies Logo" class="logo"> -->
+
+        <nav style="text-align: center; margin: 30px 0; background-color: #3a3a3a; padding: 15px; border-radius: 8px;">
+            <a href="../index.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Home</a>
+            <a href="action.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Action</a>
+            <a href="sci-fi.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Sci-Fi</a>
+            <a href="comedy.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Comedy</a>
+            <a href="horror.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Horror</a>
+            <a href="drama.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Drama</a>
+            <a href="western.html" class="movie-link" style="margin: 0 10px; background-color: #e50914;">Western</a>
+        </nav>
+
+        <h1 style="color: #e50914; font-size: 3.5em; text-shadow: 2px 2px 5px rgba(0,0,0,0.4);">
+            Mr. Movies: Sci-Fi Trailers & Film Insights
+        </h1>
+        <p style="font-size: 1.2em; text-align: center; margin-bottom: 30px; color: #e0e0e0;">
+            Explore the boundless imagination of Sci-Fi movies! Dive into the world of aliens, futuristic tech, and epic space adventures with the latest trailers, exclusive insights, and thought-provoking film reviews. Get instant access to **high-quality movie previews** and then easily explore thousands of **full-length movies** on our parent site, The MovieHub!
+        </p>
+        <p style="text-align: center; margin-top: 30px; font-size: 1.2em; font-weight: bold;">
+            Looking for full movies? <a href="https://owlsman21.github.io/MovieHub/movies.html" class="movie-link parent-site-link">Visit our Parent Site: MovieHub! For Full Movies</a>
+        </p>
+
+        <!-- MOVIE POSTERS GRID for Sci-Fi Movies (Page 4) -->
+        <h2 style="text-align: center; margin-top: 60px; margin-bottom: 30px;">Popular Sci-Fi Movies (Page 4)</h2>
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+
+            <!-- Star Trek V: The Final Frontier (1989)  -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="7S5TDrAWBd8"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Trek V: The Final Frontier (1989) </h3>
+                    <p class="movie-description">Captain Kirk and his crew must deal with Mr. Spock's long-lost half-brother who hijacks the Enterprise for an obsessive search for God at the center of the galaxy.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Trek-V-The-Final-Frontier" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Star Trek IV: The Voyage Home (1986) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="QOhoIBkOYf0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Trek IV: The Voyage Home (1986)</h3>
+                    <p class="movie-description"> To save Earth from an alien probe, Admiral James T. Kirk and his fugitive crew go back in time to San Francisco in 1986 to retrieve the only beings who can communicate with it: humpback whales.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Trek-IV-The-Voyage-Home" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Star Trek III: The Search for Spock (1984)  -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="KN1MnTZZ9Q8"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Trek III: The Search for Spock (1984) </h3>
+                    <p class="movie-description">Admiral Kirk and his bridge crew risk their careers stealing the decommissioned U.S.S. Enterprise to return to the restricted Genesis Planet to recover Spock's body.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Trek-III-The-Search-for-Spock" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Star Wars: Return of The Jedi  1983 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="EcQKTTwLA-Y"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">TStar Wars: Return of The Jedi (1983)</h3>
+                    <p class="movie-description">After rescuing Han Solo from Jabba the Hutt, the Rebel Alliance attempts to destroy the second Death Star while Luke struggles to help Darth Vader back from the dark side.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Wars-Episode-VI-Return-of-the-Jedi" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Star Trek II: The Wrath of Khan (1982) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="x8X44NRltMM"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Trek II: The Wrath of Khan (1982)</h3>
+                    <p class="movie-description">With the assistance of the Enterprise crew, Admiral Kirk must stop an old nemesis, Khan Noonien Singh, from using the life-generating Genesis Device as the ultimate weapon.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Trek-II-The-Wrath-of-Khan" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!--Star Wars Episode V The Empire Strikes Back (1980) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="YRcUdD5nthc"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Wars Episode V The Empire Strikes Back (1980)</h3>
+                    <p class="movie-description">After the Empire overpowers the Rebel Alliance, Luke Skywalker begins training with Jedi Master Yoda, while Darth Vader and bounty hunter Boba Fett pursue his friends across the galaxy.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Wars-Episode-V-The-Empire-Strikes-Back" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Star Trek: The Motion Picture (1979) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="wbvxV2OJQKk"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Star Trek: The Motion Picture (1979)</h3>
+                    <p class="movie-description">When an alien spacecraft of enormous power is spotted approaching Earth, Admiral James T. Kirk resumes command of the overhauled USS Enterprise in order to intercept it.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Star-Trek-The-Motion-Picture-1979" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Futureworld (1976) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="lTMtu4Z5T-U"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Futureworld (1976)</h3>
+                    <p class="movie-description">Upon attempting to divulge a diabolical plot of the futuristic theme park, Futureworld, an ex-employee is dispatched after he tips off the reporter who exposed Westworld. The reporter and his ex-co-reporter investigate the situation.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Futureworld" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- A Clockwork Orange 1971 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="T54uZPI4Z8A"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">A Clockwork Orange (1971)</h3>
+                    <p class="movie-description">Alex DeLarge and his droogs barbarize a decaying near-future.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=A-Clockwork-Orange" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Planet Of The Apes (1968)-->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="k0-dUM_A-Cg"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Planet Of The Apes (1968)</h3>
+                    <p class="movie-description">After being kept in hypersleep during a long expedition into deep space, an astronaut crew crash-lands in the 40th century on a planet where highly intelligent non-human ape species are dominant and humans are enslaved.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Planet-Of-The-Apes" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Deep Impact (1998) -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="W80IY4i6u4A"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Deep Impact (1998)</h3>
+                    <p class="movie-description">A comet is discovered to be on a collision course with Earth. As doomsday nears, the human race prepares for the worst</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Deep-Impact" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 32: Placeholder Sci-Fi Movie 12 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Digital Dream (2027)</h3>
+                    <p class="movie-description">A hacker uncovers a vast conspiracy within a virtual reality world that blurs the lines between reality and illusion.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Digital-Dream" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 33: Placeholder Sci-Fi Movie 13 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Alien Genesis (2026)</h3>
+                    <p class="movie-description">Scientists discover the origin of alien life on a distant planet, but the truth is far more terrifying than they imagined.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Alien-Genesis" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 34: Placeholder Sci-Fi Movie 14 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Time Warp (2025)</h3>
+                    <p class="movie-description">A group of friends accidentally travels through time, altering historical events and creating paradoxes.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Time-Warp" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 35: Placeholder Sci-Fi Movie 15 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Singularity (2028)</h3>
+                    <p class="movie-description">Humanity reaches a technological peak, leading to a new era of existence, but at what cost?</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=The-Singularity" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 36: Placeholder Sci-Fi Movie 16 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Parallel Worlds (2027)</h3>
+                    <p class="movie-description">A scientist discovers a portal to infinite parallel dimensions, each with its own version of reality.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Parallel-Worlds" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 37: Placeholder Sci-Fi Movie 17 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Cosmic Dust (2026)</h3>
+                    <p class="movie-description">A space crew investigates a mysterious anomaly, only to find themselves trapped in a nebula with strange properties.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Cosmic-Dust" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 38: Placeholder Sci-Fi Movie 18 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Wormhole Wonders (2028)</h3>
+                    <p class="movie-description">Adventurers use wormholes to explore distant galaxies, encountering bizarre civilizations and dangerous phenomena.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Wormhole-Wonders" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 39: Placeholder Sci-Fi Movie 19 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Robotic Rebellion (2027)</h3>
+                    <p class="movie-description">A dystopian future where robots have taken over, and a small human resistance fights for freedom.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Robotic-Rebellion" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+            <!-- Movie Card 40: Placeholder Sci-Fi Movie 20 -->
+            <div class="movie-card">
+                <div class="trailer-embed" data-platform="youtube" data-videoid="F1B9Fk_SgI0"></div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Galactic Guardians (2026)</h3>
+                    <p class="movie-description">A diverse team of heroes from across the galaxy unites to protect the universe from a looming threat.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Galactic-Guardians" class="movie-card-link">View Full Movie Here</a>
+                </div>
+            </div>
+
+        </section>
+        <!-- END MOVIE POSTERS GRID -->
+
+       <!-- Pagination for Page 4 -->
+        <div class="pagination">
+            <a href="sci-fi-page3.html">Previous</a>
+            <a href="sci-fi.html">1</a>
+            <a href="sci-fi-page2.html">2</a>
+            <a href="sci-fi-page3.html">3</a>
+            <span class="current-page">4</span>
+             <a href="sci-fi-page5.html">Next</a>
+        </div>
+
+        <div class="footer">
+            <p>Connect with us on social media: <a href="https://www.facebook.com/MrMovies1966" target="_blank">Mr. Movies Facebook</a></p>
+            <p>© 2025 Mr. Movies. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Video Lazy Loading Script ---
+            const videoEmbeds = document.querySelectorAll('.trailer-embed[data-platform][data-videoid]');
+
+            videoEmbeds.forEach(embedDiv => {
+                const platform = embedDiv.getAttribute('data-platform');
+                const rawVideoId = embedDiv.getAttribute('data-videoid');
+                // Clean up the ID: remove leading '/', and any '?si=' parameters
+                const videoId = rawVideoId.split('?')[0].replace(/^\//, ''); 
+
+                if (platform === 'youtube' && videoId) {
+                    // Check if it's the "Coming Soon" video ID
+                    if (videoId === 'F1B9Fk_SgI0') {
+                        // Directly set content and styles for "Coming Soon" text
+                        embedDiv.innerHTML = '<span class="coming-soon-text">Coming Soon</span>';
+                        embedDiv.style.backgroundColor = '#000'; // Ensure black background
+                        embedDiv.style.display = 'flex'; // Enable flexbox for centering
+                        embedDiv.style.alignItems = 'center'; // Center vertically
+                        embedDiv.style.justifyContent = 'center'; // Center horizontally
+                        embedDiv.style.paddingBottom = '0'; // Remove aspect ratio padding
+                        embedDiv.style.height = '300px'; // Explicitly set height as per .movie-card .trailer-embed CSS
+                    } else {
+                        // Original video lazy loading logic for actual videos
+                        const placeholder = document.createElement('div');
+                        placeholder.classList.add('trailer-embed-placeholder');
+                        placeholder.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/hqdefault.jpg)`;
+                        placeholder.style.backgroundSize = 'cover';
+                        placeholder.style.backgroundPosition = 'center';
+
+                        const playButton = document.createElement('div');
+                        playButton.classList.add('trailer-embed-play-button');
+
+                        placeholder.appendChild(playButton);
+                        embedDiv.appendChild(placeholder);
+
+                        placeholder.addEventListener('click', function() {
+                            const iframe = document.createElement('iframe');
+                            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0`);
+                            iframe.setAttribute('frameborder', '0');
+                            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                            iframe.setAttribute('allowfullscreen', '');
+                            iframe.setAttribute('title', `Video player for YouTube ID: ${videoId}`);
+
+                            try {
+                                embedDiv.replaceChild(iframe, placeholder);
+                            } catch (e) {
+                                embedDiv.innerHTML = `
+                                    <p style="color:red; text-align:center; padding:20px;">
+                                        This video cannot be embedded here, likely due to YouTube's restrictions.
+                                        <br>
+                                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" style="color: #007bff; text-decoration: underline;">Watch on YouTube</a>
+                                    </p>
+                                `;
+                            }
+                        });
+                    }
+
+                } else if (platform === 'okru' && videoId) {
+                    const iframe = document.createElement('iframe');
+                    iframe.setAttribute('src', `https://ok.ru/videoembed/${videoId}`);
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allow', 'autoplay');
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframe.setAttribute('title', `Video player for OK.ru ID: ${videoId}`);
+                    embedDiv.innerHTML = '';
+                    embedDiv.appendChild(iframe);
+                } else if (platform === 'mega') {
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Mega.nz embeds require specific handling and might not be publicly embeddable with just an ID.</p>';
+                } else {
+                    embedDiv.innerHTML = '<p style="color:red; text-align:center; padding:20px;">Error: Unsupported video platform or missing ID.</p>';
+                }
+            });
+
+            // --- Current page genre button removal logic ---
+            const pathSegments = window.location.pathname.split('/');
+            const currentPageFileName = pathSegments[pathSegments.length - 1].split('.')[0]; 
+            
+            const navLinks = document.querySelectorAll('nav .movie-link');
+
+            navLinks.forEach(link => {
+                const linkFileName = link.getAttribute('href').split('/').pop().split('.')[0];
+                
+                const isHomePath = (window.location.pathname === '/' || window.location.pathname.endsWith('/index.html'));
+                const isHomeLink = link.getAttribute('href').endsWith('index.html') || link.getAttribute('href') === '../index.html';
+
+                if (isHomePath && isHomeLink) {
+                    link.style.display = 'none'; // Hide Home button on Home page
+                } else if (linkFileName === currentPageFileName) {
+                    link.style.display = 'none'; // Hide the button for the current genre page
+                }
+            });
+        });
+    </script>
+</body>
+</html>
