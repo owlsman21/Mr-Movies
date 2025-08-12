@@ -1,0 +1,54 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub - Sci-Fi Page 1</title>
+    <!-- Load Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen p-8">
+
+    <!-- Header Section -->
+    <header class="flex justify-center items-center py-4 mb-8">
+        <a href="#" class="text-blue-400 hover:text-blue-300 transition-colors duration-200">
+            <span class="font-light text-sm">Looking for full movies?</span>
+            <span class="font-bold ml-1">Visit our Parent Site: MovieHub! For Full Movies</span>
+        </a>
+    </header>
+    
+    <!-- Main Content Area -->
+    <main class="container mx-auto">
+        <h1 class="text-3xl font-bold text-red-500 mb-6">Popular Sci-Fi Movies (Page 1)</h1>
+
+        <!-- This is a manually created movie card, corrected to show the trailer -->
+        <div id="movie-card-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105">
+                <!-- Trailer Embed Section - The iframe is now directly embedded -->
+                <div class="relative aspect-video">
+                    <iframe
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/IeAoLoiJ4HI?rel=0"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <!-- Movie Info Section -->
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-400">Lumina (2024)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Lumina follows four friends desperately searching for their abductee friend in a DUMB. Whether they find their friend or not in the deserts of the US to the sands of the Sahara, will change their lives forever.</p>
+                    <a href="https://owlsman21.github.io/MovieHub/movie-details.html?id=Lumina" class="text-red-500 font-medium hover:underline transition-colors duration-200">View Full Movie Here</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
